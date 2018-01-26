@@ -1,9 +1,23 @@
 {
   "ignore": [],
-  "presets": [
-    "react",
-    "env"
-  ],
+  "env": {
+    "test": {
+      "presets": [
+        "es2015",
+        "react"
+      ]
+    },
+    "production": {
+      "presets": [
+        "react"
+      ]
+    },
+    "development": {
+      "presets": [
+        "react"
+      ]
+    }
+  },
   "plugins": [
     [
       "transform-object-rest-spread",
