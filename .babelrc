@@ -1,0 +1,15 @@
+{
+  "ignore": [],
+  "presets": [
+    "react",
+    "env"
+  ],
+  "plugins": [
+    [
+      "transform-object-rest-spread",
+      {
+        "useBuiltIns": true
+      }
+    ]
+  ]
+}
