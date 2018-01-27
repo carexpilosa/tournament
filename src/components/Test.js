@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { updateData } from '../../actions';
+import { updateData } from '../actions';
 
 class Test extends React.Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class Test extends React.Component {
   }
 
   onInputChange(e) {
-    console.log(e.target.value);
     let data = {};
     data[Math.floor(10*Math.random())] = 
       {
