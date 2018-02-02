@@ -9,6 +9,12 @@ class Test extends React.Component {
     this.state = {
       counter: 0
     };
+    
+    console.log(this);
+  }
+  
+  componentDidMount() {
+    console.log('+++');
   }
 
   render() {
@@ -24,7 +30,7 @@ class Test extends React.Component {
   }
 
   callBackFct() {
-    console.log('callback called');
+    console.log('########');
   }
 
   onInputChange(e) {
