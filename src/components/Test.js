@@ -9,7 +9,7 @@ class Test extends React.Component {
     this.state = {
       counter: 0
     };
-    
+    this.boundCallBackFct = this.callBackFct.bind(this);
     console.log(this);
   }
   
@@ -25,12 +25,12 @@ class Test extends React.Component {
       {
         Object.keys(this.props.data).map(k => <div key={k}>{k}</div>)
       }
-      <Sub callbF={this.callBackFct} />
+      <Sub callbF={this.boundCallBackFct} />
     </div>;
   }
 
   callBackFct() {
-    console.log('########');
+    console.log('########', this.state);
   }
 
   onInputChange(e) {
