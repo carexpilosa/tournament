@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Test from './components/Test';
-import { Provider } from 'react-redux';
-import { store } from './store';
+import ChessCrossTable from './components/ChessCrossTable';
 import './styles/styles.css';
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Test />
-  </Provider>,
+  <div>
+    <ChessCrossTable />
+  </div>,
   document.getElementById('app')
 );
-
-
 
 
 
