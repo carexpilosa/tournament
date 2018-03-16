@@ -18,11 +18,11 @@ class Main extends React.Component {
     return (
       <div>
         <h3>Chess Tournament</h3>
-        <PlayerList players={this.state.players}/>
+        <PlayerList players={players}/>
         <Input onKeyDown={this.inputOnKeyDown.bind(this)} aOnClick={this.aOnClick.bind(this)}
           inputOnChange={this.inputOnChange.bind(this)} inputValue={this.state.inputValue} />
-        <CrossTable players={this.state.players}/>
-        <Pairings players={this.state.players} round={1}/>
+        <CrossTable players={players}/>
+        <Pairings players={players} round={1}/>
       </div>
     );
   }
