@@ -15,16 +15,27 @@ class CrossTable extends React.Component {
           <tr><td></td>
         {
           players.map((sp, idx) => {
-            return <td style={{border: '2px solid black'}} key={idx}>{sp.name }</td>;
+            return <td style={{
+              border: '2px solid black',
+              fontWeight: 'bold'
+              /*transform: 'rotate(90deg)',
+              transformOrigin: 'left top 0'*/
+            }} key={idx}>{sp.name.substr(0,4)}...</td>;
           })
         }
         </tr>
         {
           players.map((sp, idx) => {
-            return <tr key={idx}><td style={{border: '2px solid black'}}>{sp.name}</td>
+            return <tr key={idx}><td 
+              style={{
+                border: '2px solid black',
+                textAlign: 'right',
+                fontWeight: 'bold'
+              }}>{sp.name}</td>
             {
-              this.props.players.map((sp, idx) => <td style={{border: '2px solid black'}} 
-                key={idx}>- : -</td>)
+              players.map((sp, index) => <td 
+                style={{border: '2px solid black', textAlign: 'center'}} 
+                key={idx}>{idx === index ? 'X' : '- : -'}</td>)
             }
             </tr>;
           })

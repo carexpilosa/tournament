@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ChessTournament from './components/ChessTournament/Main';
+import ChessTournament from './components/Tournament/Main';
 import './styles/styles.css';
 
 

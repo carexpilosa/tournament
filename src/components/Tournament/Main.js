@@ -44,17 +44,19 @@ class Main extends React.Component {
   }
 
   insertPlayer(playername) {
-    const newPlayer = {
-      name: playername,
-      order: Math.random()
-    };
-    const newPlayerArray = [ ...this.state.players, newPlayer ].sort((a, b) => {
-      return a.order > b.order ? 1 : a.order < b.order ? -1 : 0;
-    });
-    this.setState({
-      players: newPlayerArray,
-      inputValue: ''
-    });
+    if (playername) {
+      const newPlayer = {
+        name: playername,
+        order: Math.random()
+      };
+      const newPlayerArray = [ ...this.state.players, newPlayer ].sort((a, b) => {
+        return a.order > b.order ? 1 : a.order < b.order ? -1 : 0;
+      });
+      this.setState({
+        players: newPlayerArray,
+        inputValue: ''
+      });
+    }
   }
 }
 
