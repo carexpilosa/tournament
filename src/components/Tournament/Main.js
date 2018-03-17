@@ -52,11 +52,40 @@ class Main extends React.Component {
       const newPlayerArray = [ ...this.state.players, newPlayer ].sort((a, b) => {
         return a.order > b.order ? 1 : a.order < b.order ? -1 : 0;
       });
+      const NumberdPlayerArray = newPlayerArray.map((player, idx) => {
+        player.number = idx + 1;
+        return player;
+      });
       this.setState({
-        players: newPlayerArray,
+        players: NumberdPlayerArray,
         inputValue: ''
       });
     }
+  }
+
+  getContrahendIdx(numberOfPlayers, roundNumber, playerNumber) {
+    for (let i = 1; i < numberOfPlayers; i++) {
+      if (i !== playerNumber &&
+        (playerNumber + i) % (numberOfPlayers - 1) === roundNumber) {
+        return i;
+      }
+    }
+    return numberOfPlayers;
+  }
+
+  getPairing(playerNumber1, playerNumber2, isBackRound) {
+    let ret;
+    const [highNumber, lowNumber] =
+      playerNumber1 > playerNumber2 ? [playerNumber1, playerNumber2] :
+        [playerNumber2, playerNumber1];
+    if (isBackRound) {
+      ret = (playerNumber1 + playerNumber2) % 2 ? [highNumber, lowNumber] :
+        [lowNumber, highNumber];      
+    } else {
+      ret = (playerNumber1 + playerNumber2) % 2 ? [lowNumber, highNumber] :
+        [highNumber, lowNumber];
+    }
+    return ret;
   }
 }
 
