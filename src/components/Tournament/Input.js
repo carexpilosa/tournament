@@ -6,7 +6,6 @@ class ChessTournament extends React.Component {
   }
   
   render() {
-    console.log('=>', this.props.inputValue);
     return (
       <div>
         <input onChange={this.props.inputOnChange} type="text" 

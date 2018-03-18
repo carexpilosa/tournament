@@ -26,7 +26,7 @@ class CrossTable extends React.Component {
         </tr>
         {
           players.map((sp, idx) => {
-            return <tr key={idx}><td 
+            return <tr key={`${idx}-1`}><td 
               style={{
                 border: '2px solid black',
                 textAlign: 'right',
@@ -35,7 +35,7 @@ class CrossTable extends React.Component {
             {
               players.map((sp, index) => <td 
                 style={{border: '2px solid black', textAlign: 'center'}} 
-                key={idx}>{idx === index ? 'X' : '- : -'}</td>)
+                key={`${idx}-${index}`}>{idx === index ? 'X' : '- : -'}</td>)
             }
             </tr>;
           })

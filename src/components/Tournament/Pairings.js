@@ -13,9 +13,9 @@ class Pairings extends React.Component {
         {
           players.map((player, index) => {
             if (index % 2 ) {
-              return <span>{player.name}<br/></span>;
+              return <span key={index}>{player.name}<br/></span>;
             } else {
-              return <span>{player.name} - </span>;
+              return <span key={index}>{player.name} - </span>;
             }
             
           })

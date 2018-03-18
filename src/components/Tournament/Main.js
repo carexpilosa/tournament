@@ -15,6 +15,11 @@ class Main extends React.Component {
   
   render() {
     const players = this.state.players;
+    for(let i = 1; i < players.length; i++) {
+      //console.log(i + '.ST: ', this.getPairings(i));
+      this.getPairings(i);
+    }
+
     return (
       <div>
         <h3>Chess Tournament</h3>
@@ -63,7 +68,7 @@ class Main extends React.Component {
     }
   }
 
-  getContrahendIdx(numberOfPlayers, roundNumber, playerNumber) {
+  getOpponentIdx(numberOfPlayers, roundNumber, playerNumber) {
     for (let i = 1; i < numberOfPlayers; i++) {
       if (i !== playerNumber &&
         (playerNumber + i) % (numberOfPlayers - 1) === roundNumber) {
@@ -72,7 +77,22 @@ class Main extends React.Component {
     }
     return numberOfPlayers;
   }
-
+  
+  getPairings(roundNumber) {
+    const players = this.state.players;
+    const numberOfPlayers = players.length;
+    const pairings = [];
+    const pairingObj = {};
+    players.slice(0, -1).forEach(player => {
+      const opponentNumber = this.getOpponentIdx(numberOfPlayers, roundNumber, player.number);
+      console.log('ST '+roundNumber, 'player = '+player.number, 'opponent: '+opponentNumber);
+      const newPairing = this.getPairing(player.number, opponentNumber);
+      pairings.push(newPairing);
+      pairingObj[newPairing[0]] = newPairing[1];
+    });
+    return pairings;
+  }
+  
   getPairing(playerNumber1, playerNumber2, isBackRound) {
     let ret;
     const [highNumber, lowNumber] =
