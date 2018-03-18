@@ -8,7 +8,28 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [],
+      players: [
+        {
+          name: 'Hotte',
+          order: 0.1,
+          number: 1
+        },
+        {
+          name: 'Susi',
+          order: 0.2,
+          number: 2
+        },
+        {
+          name: 'Karl',
+          order: 0.3,
+          number: 3
+        },
+        {
+          name: 'Bernd',
+          order: 0.4,
+          number: 4
+        }
+      ],
       inputValue: ''
     };
   }
@@ -16,7 +37,7 @@ class Main extends React.Component {
   render() {
     const players = this.state.players;
     for(let i = 1; i < players.length; i++) {
-      //console.log(i + '.ST: ', this.getPairings(i));
+      console.log(i + '.ST: ', this.getPairings(i));
       this.getPairings(i);
     }
 
@@ -69,13 +90,24 @@ class Main extends React.Component {
   }
 
   getOpponentIdx(numberOfPlayers, roundNumber, playerNumber) {
+    let ret;
     for (let i = 1; i < numberOfPlayers; i++) {
       if (i !== playerNumber &&
-        (playerNumber + i) % (numberOfPlayers - 1) === roundNumber) {
-        return i;
+        (
+          ((playerNumber + i) % (numberOfPlayers - 1) === roundNumber) ||
+          (
+            roundNumber === numberOfPlayers - 1 &&
+            (playerNumber + i) % (numberOfPlayers - 1) === 0
+          )
+        )) {
+        ret = i;
+        break;
       }
     }
-    return numberOfPlayers;
+    if (! ret) {
+      ret = numberOfPlayers;
+    }
+    return ret;
   }
   
   getPairings(roundNumber) {
@@ -85,11 +117,11 @@ class Main extends React.Component {
     const pairingObj = {};
     players.slice(0, -1).forEach(player => {
       const opponentNumber = this.getOpponentIdx(numberOfPlayers, roundNumber, player.number);
-      console.log('ST '+roundNumber, 'player = '+player.number, 'opponent: '+opponentNumber);
       const newPairing = this.getPairing(player.number, opponentNumber);
       pairings.push(newPairing);
       pairingObj[newPairing[0]] = newPairing[1];
     });
+    console.log(pairingObj);
     return pairings;
   }
   
