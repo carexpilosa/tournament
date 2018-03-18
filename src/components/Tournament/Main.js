@@ -36,11 +36,6 @@ class Main extends React.Component {
   
   render() {
     const players = this.state.players;
-    for(let i = 1; i < players.length; i++) {
-      console.log(i + '.ST: ', this.getPairings(i));
-      this.getPairings(i);
-    }
-
     return (
       <div>
         <h3>Chess Tournament</h3>
@@ -48,7 +43,7 @@ class Main extends React.Component {
         <Input onKeyDown={this.inputOnKeyDown.bind(this)} aOnClick={this.aOnClick.bind(this)}
           inputOnChange={this.inputOnChange.bind(this)} inputValue={this.state.inputValue} />
         <CrossTable players={players}/>
-        <Pairings players={players} round={1}/>
+        <Pairings players={players} round={1} getPairings={this.getPairings.bind(this)} />
       </div>
     );
   }
@@ -121,8 +116,7 @@ class Main extends React.Component {
       pairings.push(newPairing);
       pairingObj[newPairing[0]] = newPairing[1];
     });
-    console.log(pairingObj);
-    return pairings;
+    return pairingObj;
   }
   
   getPairing(playerNumber1, playerNumber2, isBackRound) {

@@ -7,6 +7,13 @@ class Pairings extends React.Component {
   
   render() {
     const players = this.props.players;
+    let pairings = {};
+    for(let gameDay = 1; gameDay < players.length; gameDay++) {
+      pairings[gameDay] = this.props.getPairings(gameDay);
+    }
+
+    console.log(pairings);
+    
     return (
       <div>
         <h4>Pairings</h4>
@@ -17,7 +24,6 @@ class Pairings extends React.Component {
             } else {
               return <span key={index}>{player.name} - </span>;
             }
-            
           })
         }
       </div>
