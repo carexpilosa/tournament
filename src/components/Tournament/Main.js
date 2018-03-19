@@ -10,24 +10,94 @@ class Main extends React.Component {
     this.state = {
       players: [
         {
-          name: 'Hotte',
-          order: 0.1,
-          number: 1
+          'name': 'Schmalhans',
+          'order': 0.0826898873245514,
+          'number': 1
         },
         {
-          name: 'Susi',
-          order: 0.2,
-          number: 2
+          'name': 'Hotte',
+          'order': 0.1,
+          'number': 2
         },
         {
-          name: 'Karl',
-          order: 0.3,
-          number: 3
+          'name': 'Lumpi',
+          'order': 0.15302177983324627,
+          'number': 3
         },
         {
-          name: 'Bernd',
-          order: 0.4,
-          number: 4
+          'name': 'Susi',
+          'order': 0.2,
+          'number': 4
+        },
+        {
+          'name': 'Georg',
+          'order': 0.20081507921971453,
+          'number': 5
+        },
+        {
+          'name': 'Gitti',
+          'order': 0.27795427396785355,
+          'number': 6
+        },
+        {
+          'name': 'Karl-Heinz',
+          'order': 0.2983734380983851,
+          'number': 7
+        },
+        {
+          'name': 'Karl',
+          'order': 0.3,
+          'number': 8
+        },
+        {
+          'name': 'Bernd',
+          'order': 0.4,
+          'number': 9
+        },
+        {
+          'name': 'Ristic',
+          'order': 0.40831690859184855,
+          'number': 10
+        },
+        {
+          'name': 'Plemplem',
+          'order': 0.44494656478135663,
+          'number': 11
+        },
+        {
+          'name': 'Heinrich',
+          'order': 0.45251055382303407,
+          'number': 12
+        },
+        {
+          'name': 'Oleg',
+          'order': 0.478084942178713,
+          'number': 13
+        },
+        {
+          'name': 'Lulu',
+          'order': 0.67486824328,
+          'number': 14
+        },
+        {
+          'name': 'Otto',
+          'order': 0.7514589418809869,
+          'number': 15
+        },
+        {
+          'name': 'Willi',
+          'order': 0.8491021525563145,
+          'number': 16
+        },
+        {
+          'name': 'Kowalski',
+          'order': 0.8620134855342321,
+          'number': 17
+        },
+        {
+          'name': 'Manne',
+          'order': 0.9781792839547732,
+          'number': 18
         }
       ],
       inputValue: ''
