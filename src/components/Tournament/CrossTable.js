@@ -31,7 +31,7 @@ class CrossTable extends React.Component {
                 border: '2px solid black',
                 textAlign: 'right',
                 fontWeight: 'bold'
-              }}>{sp.name}</td>
+              }}>{sp.number}. {sp.name}</td>
             {
               players.map((sp, index) => <td 
                 style={{border: '2px solid black', textAlign: 'center'}} 

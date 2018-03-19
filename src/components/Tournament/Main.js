@@ -45,7 +45,7 @@ class Main extends React.Component {
           'number': 7
         },
         {
-          'name': 'Karl',
+          'name': 'Seppo',
           'order': 0.3,
           'number': 8
         },
@@ -114,8 +114,15 @@ class Main extends React.Component {
           inputOnChange={this.inputOnChange.bind(this)} inputValue={this.state.inputValue} />
         <CrossTable players={players}/>
         <Pairings players={players} round={1} getPairings={this.getPairings.bind(this)} />
+        <a href="#" onClick={this.deleteAllPlayers.bind(this)}>delete all</a>
       </div>
     );
+  }
+
+  deleteAllPlayers() {
+    this.setState({
+      players: []
+    });
   }
 
   inputOnKeyDown(e) {
