@@ -84,25 +84,23 @@ class Main extends React.Component {
     }
   }
 
-  getOpponentIdx(numberOfPlayers, roundNumber, playerNumber) {
-    let ret;
+  getOpponentId(numberOfPlayers, roundNumber, playerNumber) {
+    let opponentId;
+    const maxRoundNumber = numberOfPlayers - 1;
     for (let i = 1; i < numberOfPlayers; i++) {
+      const sumOpponents = playerNumber + i,
+        divisionRest = sumOpponents % maxRoundNumber;
       if (i !== playerNumber &&
         (
-          ((playerNumber + i) % (numberOfPlayers - 1) === roundNumber) ||
-          (
-            roundNumber === numberOfPlayers - 1 &&
-            (playerNumber + i) % (numberOfPlayers - 1) === 0
-          )
-        )) {
-        ret = i;
+          divisionRest === roundNumber ||
+          roundNumber === maxRoundNumber && divisionRest === 0
+        )
+      ) {
+        opponentId = i;
         break;
       }
     }
-    if (! ret) {
-      ret = numberOfPlayers;
-    }
-    return ret;
+    return opponentId || numberOfPlayers; //opponentId is never 0
   }
   
   getPairings(roundNumber) {
@@ -111,7 +109,7 @@ class Main extends React.Component {
     const pairings = [];
     const pairingObj = {};
     players.slice(0, -1).forEach(player => {
-      const opponentNumber = this.getOpponentIdx(numberOfPlayers, roundNumber, player.number);
+      const opponentNumber = this.getOpponentId(numberOfPlayers, roundNumber, player.number);
       const newPairing = this.getPairing(player.number, opponentNumber);
       pairings.push(newPairing);
       pairingObj[newPairing[0]] = newPairing[1];
