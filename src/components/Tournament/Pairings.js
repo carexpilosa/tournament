@@ -17,17 +17,8 @@ class Pairings extends React.Component {
       <div>
         <h4>Pairings</h4>
         {
-          /*players.map((player, index) => {
-            if (index % 2 ) {
-              return <span key={index}>{player.name}<br/></span>;
-            } else {
-              return <span key={index}>{player.name} - </span>;
-            }
-          })*/
-        }
-        {
           Object.keys(pairings).map((gameday, idx) => {
-            const renderData = Object.keys(pairings[gameday]).map((whiteID, idx) => {
+            const pairingsOfGameDay = Object.keys(pairings[gameday]).map((whiteID, idx) => {
               return (
                 <span key={idx}>
                   <span style={{
@@ -44,7 +35,11 @@ class Pairings extends React.Component {
                 </span>
               );
             });
-            return <span key={idx}>{`${gameday}. Spieltag: `}<br/>{renderData}<br/></span>;
+            return (
+              <span key={idx}>
+                {gameday}. Spieltag: <br/>{pairingsOfGameDay}<br/>
+              </span>
+            );
           })
         }
       </div>
