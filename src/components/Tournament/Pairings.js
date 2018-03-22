@@ -4,42 +4,29 @@ class Pairings extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     const players = this.props.players;
-    console.log(players);
     let pairings = {};
-    for(let gameDay = 1; gameDay < players.length; gameDay++) {
-      pairings[gameDay] = this.props.getPairings(gameDay);
+    for(let round = 1; round < players.length; round++) {
+      pairings[round] = this.props.getPairings(round);
     }
+    console.log(pairings);
 
     return (
       <div>
         <h4>Pairings</h4>
         {
-          Object.keys(pairings).map((gameday, idx) => {
-            const pairingsOfGameDay = Object.keys(pairings[gameday]).map((whiteID, idx) => {
-              return (
-                <span key={idx}>
-                  <span style={{
-                    textAlign: 'right',
-                    display: 'block',
-                    float: 'left',
-                    width: '150px'
-                  }}>{players[whiteID-1].name}</span>
-                  <span> - </span>
-                  <span style={{
-                    textAlign: 'left',
-                    backgroundColor: '#DDDDDD'
-                  }}>{players[pairings[gameday][whiteID]-1].name}<br/></span>
-                </span>
-              );
+          Object.keys(pairings).map((round, index) => {
+            let gameNr = 1;
+            const pairingsOfRound = Object.keys(pairings[round]).map((whiteID, idx) => {
+              let blackID = pairings[round][whiteID];
+              return <div key={idx}><strong>{gameNr++}</strong>: {whiteID}. {players[whiteID].name} - {blackID}. {players[blackID].name}</div>;
             });
-            return (
-              <span key={idx}>
-                {gameday}. Spieltag: <br/>{pairingsOfGameDay}<br/>
-              </span>
-            );
+            return (<div key={index}>
+              <h3>Pairings of round {round}</h3>
+              <div>{pairingsOfRound}</div>
+            </div>);
           })
         }
       </div>

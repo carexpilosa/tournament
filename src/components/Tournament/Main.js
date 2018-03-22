@@ -103,7 +103,7 @@ class Main extends React.Component {
       inputValue: ''
     };
   }
-  
+
   render() {
     const players = this.state.players;
     return (
@@ -161,13 +161,13 @@ class Main extends React.Component {
     }
   }
 
-  getOpponentId(numberOfPlayers, roundNumber, playerNumber) {
+  getOpponentId(numberOfPlayers, roundNumber, playerID) {
     let opponentId;
     const maxRoundNumber = numberOfPlayers - 1;
     for (let i = 1; i < numberOfPlayers; i++) {
-      const sumOpponents = playerNumber + i,
+      const sumOpponents = playerID + i,
         divisionRest = sumOpponents % maxRoundNumber;
-      if (i !== playerNumber &&
+      if (i !== playerID &&
         (
           divisionRest === roundNumber ||
           roundNumber === maxRoundNumber && divisionRest === 0
@@ -177,23 +177,25 @@ class Main extends React.Component {
         break;
       }
     }
-    return opponentId || numberOfPlayers; //opponentId is never 0
+    return opponentId || 0; //opponentId is never 0
   }
-  
+
   getPairings(roundNumber) {
     const players = this.state.players;
     const numberOfPlayers = players.length;
     const pairings = [];
     const pairingObj = {};
-    players.slice(0, -1).forEach(player => {
-      const opponentNumber = this.getOpponentId(numberOfPlayers, roundNumber, player.number);
-      const newPairing = this.getPairing(player.number, opponentNumber);
+    players.forEach((player, idx) => {
+      if(idx === 0) return;
+      console.log(idx);
+      const opponentNumber = this.getOpponentId(numberOfPlayers, roundNumber, idx);
+      const newPairing = this.getPairing(idx, opponentNumber);
       pairings.push(newPairing);
       pairingObj[newPairing[0]] = newPairing[1];
     });
     return pairingObj;
   }
-  
+
   getPairing(playerNumber1, playerNumber2, isBackRound) {
     let ret;
     const [highNumber, lowNumber] =
@@ -201,7 +203,7 @@ class Main extends React.Component {
         [playerNumber2, playerNumber1];
     if (isBackRound) {
       ret = (playerNumber1 + playerNumber2) % 2 ? [highNumber, lowNumber] :
-        [lowNumber, highNumber];      
+        [lowNumber, highNumber];
     } else {
       ret = (playerNumber1 + playerNumber2) % 2 ? [lowNumber, highNumber] :
         [highNumber, lowNumber];

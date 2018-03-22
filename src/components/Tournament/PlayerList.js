@@ -12,7 +12,7 @@ class PlayerList extends React.Component {
         <h4>List Of Players</h4>
         <ul>
         {
-          players.map((sp, idx) => <li key={idx}>{idx+1} {sp.name}</li>)
+          players.map((sp, idx) => <li key={idx}>{idx} {sp.name}</li>)
         }
         </ul>
       </div>
