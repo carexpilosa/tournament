@@ -185,15 +185,20 @@ class Main extends React.Component {
     const numberOfPlayers = players.length;
     const pairings = [];
     const pairingObj = {};
+    const pairingMap = new Map();
+    //console.log('>>>');
     players.forEach((player, idx) => {
       if(idx === 0) return;
-      console.log(idx);
       const opponentNumber = this.getOpponentId(numberOfPlayers, roundNumber, idx);
       const newPairing = this.getPairing(idx, opponentNumber);
+      //console.log(newPairing);
       pairings.push(newPairing);
       pairingObj[newPairing[0]] = newPairing[1];
+      pairingMap.set(newPairing[0], newPairing[1]);
     });
-    return pairingObj;
+    //console.log('<<<');
+    //console.log(pairingMap);
+    return pairingMap;
   }
 
   getPairing(playerNumber1, playerNumber2, isBackRound) {

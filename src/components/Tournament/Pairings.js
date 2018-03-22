@@ -7,21 +7,19 @@ class Pairings extends React.Component {
 
   render() {
     const players = this.props.players;
-    let pairings = {};
+    let pairings = new Map();
     for(let round = 1; round < players.length; round++) {
-      pairings[round] = this.props.getPairings(round);
+      //console.log(round, this.props.getPairings(round));
+      pairings.set(round, this.props.getPairings(round));
     }
-    console.log(pairings);
 
     return (
       <div>
         <h4>Pairings</h4>
         {
-          Object.keys(pairings).map((round, index) => {
-            let gameNr = 1;
-            const pairingsOfRound = Object.keys(pairings[round]).map((whiteID, idx) => {
-              let blackID = pairings[round][whiteID];
-              return <div key={idx}><strong>{gameNr++}</strong>: {whiteID}. {players[whiteID].name} - {blackID}. {players[blackID].name}</div>;
+          Array.from(pairings).map(([round, val], index) => {
+            const pairingsOfRound = Array.from(val).map(([whiteID, blackID], idx) => {
+              return <div key={idx}><strong>{idx + 1}</strong>: {whiteID}. {players[whiteID].name} - {blackID}. {players[blackID].name}</div>;
             });
             return (<div key={index}>
               <h3>Pairings of round {round}</h3>
