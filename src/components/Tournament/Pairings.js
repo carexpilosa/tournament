@@ -9,7 +9,6 @@ class Pairings extends React.Component {
     const players = this.props.players;
     let pairings = new Map();
     for(let round = 1; round < players.length; round++) {
-      //console.log(round, this.props.getPairings(round));
       pairings.set(round, this.props.getPairings(round));
     }
 
@@ -34,7 +33,8 @@ class Pairings extends React.Component {
                     {whiteID}. {players[whiteID].name}
                   </div>
                   <div style={{width: '90px'}}>
-                    <select name={`${round}_${whiteID}_${blackID}_white`} defaultValue=""
+                    <select name={`${round}:${whiteID}_${blackID}`} defaultValue=""
+                      onChange={e => console.log(e.target.name, e.target.value)}
                       style={{textAlignLast: 'center'}}>
                       <option value="empty">- : -</option>
                       <option value="0">0 : 1</option>
