@@ -3,3 +3,7 @@
 .divStyle {
   background-color: yellow;
 }
+
+div {
+  /*border: 1px solid blue*/
+}
