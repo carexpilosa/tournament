@@ -40,7 +40,6 @@ class CrossTable extends React.Component {
                 
                 if (res.length) {
                   const matchingResult = res[res.length-1];
-                  console.log(matchingResult);
                   if (matchingResult.result !== -1) {
                     resWhite = matchingResult.result;
                     resBlack = 1 - matchingResult.result;
