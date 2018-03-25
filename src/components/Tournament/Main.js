@@ -98,8 +98,9 @@ class Main extends React.Component {
           'name': 'Manne',
           'order': 0.9781792839547732,
           'number': 18
-        }
+        },
       ],
+      results: [],
       inputValue: ''
     };
   }
@@ -112,8 +113,9 @@ class Main extends React.Component {
         <PlayerList players={players}/>
         <Input onKeyDown={this.inputOnKeyDown.bind(this)} aOnClick={this.aOnClick.bind(this)}
           inputOnChange={this.inputOnChange.bind(this)} inputValue={this.state.inputValue} />
-        <CrossTable players={players}/>
-        <Pairings players={players} round={1} getPairings={this.getPairings.bind(this)} />
+        <CrossTable players={players} results={this.state.results}/>
+        <Pairings players={players} round={1} getPairings={this.getPairings.bind(this)}
+          saveResult={this.saveResult.bind(this)} />
         <a href="#" onClick={this.deleteAllPlayers.bind(this)}>delete all</a>
       </div>
     );
@@ -214,6 +216,20 @@ class Main extends React.Component {
         [highNumber, lowNumber];
     }
     return ret;
+  }
+
+  saveResult(e, round, whiteID, blackID) {
+    let newResultObj = {
+      round,
+      whiteID,
+      blackID,
+      result: parseFloat(e.target.value)
+    };
+
+    let newResults = { ...this.state.result, newResultObj };
+    this.setState({
+      results: [ ...this.state.results, newResultObj ]
+    });
   }
 }
 

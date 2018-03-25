@@ -24,7 +24,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
-    "build": "webpack",
-    "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot"
+    "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot",
+    "build": "./node_modules/.bin/webpack --config webpack.config.prod.js"
   }
 }

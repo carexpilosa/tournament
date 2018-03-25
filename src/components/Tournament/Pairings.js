@@ -11,6 +11,7 @@ class Pairings extends React.Component {
     for(let round = 1; round < players.length; round++) {
       pairings.set(round, this.props.getPairings(round));
     }
+    //console.log('pairings', pairings);
 
     return (
       <div>
@@ -20,30 +21,27 @@ class Pairings extends React.Component {
             const pairingsOfRound = Array.from(val).map(([whiteID, blackID], idx) => {
               return <div key={idx} style={{
                 display: 'flex',
-                width: '520px'
+                width: '580px'
               }}>
                 <div style={{
-                  width: '370px',
+                  width: '390px',
                   display: 'flex', backgroundColor: idx % 2 ? 'white' : 'gray'
                 }}>
-                  <div style={{width: '20px'}}>
-                    <strong>{idx + 1}</strong>:
-                  </div>
-                  <div style={{width: '150px'}}>
-                    {whiteID}. {players[whiteID].name}
+                  <div style={{width: '170px', textAlign: 'right', marginRight: '8px'}}>
+                    {players[whiteID].name} { /*white King: */ } &#9812;
                   </div>
                   <div style={{width: '90px'}}>
                     <select name={`${round}:${whiteID}_${blackID}`} defaultValue=""
-                      onChange={e => console.log(e.target.name, e.target.value)}
+                      onChange={e => this.props.saveResult(e, round, whiteID, blackID)}
                       style={{textAlignLast: 'center'}}>
-                      <option value="empty">- : -</option>
+                      <option value="-1">- : -</option>
                       <option value="0">0 : 1</option>
                       <option value="0.5">1/2 : 1/2</option>  
                       <option value="1">1 : 0</option>  
                     </select>
                   </div>
-                  <div style={{width: '150px'}}>
-                    {blackID}. {players[blackID].name} 
+                  <div style={{width: '170px'}}>
+                    { /*black King: */ } &#9818; {players[blackID].name} 
                   </div>
                 </div>
               </div>;
@@ -57,6 +55,8 @@ class Pairings extends React.Component {
       </div>
     );
   }
+
+  
 }
 
 export default Pairings;
