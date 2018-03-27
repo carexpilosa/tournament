@@ -1,6 +1,6 @@
-export function updateData(data) {
+export function updatePlayers(data) {
   return {
-    type: 'UPDATE_DATA',
+    type: 'UPDATE_PLAYERS',
     data
   };
 }
