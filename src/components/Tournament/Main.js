@@ -31,8 +31,16 @@ class Main extends React.Component {
 
   insertPlayer(playerName) {
     this.props.updatePlayers([{
-      name: playerName
+      name: playerName,
+      id: this.getHighestPlayerId() + 1
     }]);
+  }
+
+  getHighestPlayerId() {
+    const highestId = this.props.players.reduce((zwischenergebnis, player) => {
+      return player.id > zwischenergebnis ? player.id : zwischenergebnis;
+    }, 0);
+    return highestId;
   }
 }
 
