@@ -16,19 +16,19 @@ const initialState = {
   players: [
     {
       name: 'Horst',
-      id: 1
+      id: 0
     },
     {
       name: 'Hugo',
-      id: 2
+      id: 1
     },
     {
       name: 'Anton',
-      id: 3
+      id: 2
     },
     {
       name: 'Fred',
-      id: 4
+      id: 3
     }
   ]
 };
