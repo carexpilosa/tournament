@@ -5,6 +5,7 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 //import Pairings from './Pairings';
+import { updatePlayers } from '../../actions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class Main extends React.Component {
   }
 
   insertPlayer(playerName) {
-    console.log('insertPlayer => ' + playerName);
+    this.props.updatePlayers([{
+      name: playerName
+    }]);
   }
 }
 
@@ -39,7 +42,9 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    updatePlayers: (data) => dispatch(updatePlayers(data))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

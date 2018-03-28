@@ -1,12 +1,16 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 export function playersReducer(state={}, action) {
   switch (action.type) {
     case 'UPDATE_PLAYERS':
-      return { ...state, ...action.data };
+      return [ ...state, ...action.data ];
     default: return state;
   }
 }
+
+const rootReducer = combineReducers({
+  players: playersReducer
+});
 
 const initialState = {
   players: [
@@ -30,7 +34,7 @@ const initialState = {
 };
 
 export const store = createStore(
-  playersReducer,
+  rootReducer,
   initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
