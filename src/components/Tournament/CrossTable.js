@@ -32,19 +32,19 @@ class CrossTable extends React.Component {
               }}>{idx}. {sp.name}</td>
             {
               players.map((sp, index) => {
-                const res = this.props.results.filter(result => {
+                /*const res = this.props.results.filter(result => {
                   return result.whiteID === idx && result.blackID === index;
-                });
+                });*/
                 let resWhite = '-',
                   resBlack = '-';
                 
-                if (res.length) {
+                /*if (res.length) {
                   const matchingResult = res[res.length-1];
                   if (matchingResult.result !== -1) {
                     resWhite = matchingResult.result;
                     resBlack = 1 - matchingResult.result;
                   }
-                }
+                }*/
                 return (
                   <td style={{border: '2px solid black', textAlign: 'center'}} 
                   key={`${idx}-${index}`}>{idx === index ? 'X' : `${resWhite} : ${resBlack}`}</td>
