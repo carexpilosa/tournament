@@ -6,7 +6,7 @@ class CrossTable extends React.Component {
   }
   
   render() {
-    const players = this.props.players;
+    const { players, results } = this.props;
     return (
       <div>
         <h4>Cross Table</h4>
@@ -18,7 +18,8 @@ class CrossTable extends React.Component {
             return <td style={{
               border: '2px solid black',
               fontWeight: 'bold'
-            }} key={idx}>{sp.name.substr(0,4)}...</td>;
+            }} key={idx}>
+              {sp.name.length > 5 ? `${sp.name.substr(0,4)}...` : sp.name}</td>;
           })
         }
         </tr>
@@ -32,19 +33,12 @@ class CrossTable extends React.Component {
               }}>{idx + 1} {sp.name}</td>
             {
               players.map((sp, index) => {
-                /*const res = this.props.results.filter(result => {
-                  return result.whiteID === idx && result.blackID === index;
-                });*/
-                let resWhite = '-',
-                  resBlack = '-';
-                
-                /*if (res.length) {
-                  const matchingResult = res[res.length-1];
-                  if (matchingResult.result !== -1) {
-                    resWhite = matchingResult.result;
-                    resBlack = 1 - matchingResult.result;
-                  }
-                }*/
+                const result = this.getResult(idx, index).toString();
+                const [resWhite, resBlack] = 
+                  result === '0' ? ['0', '1'] : 
+                    result === '0.5' ? ['0.5', '0.5'] :
+                      result === '1' ? ['1', '0'] : ['-', '-'];
+
                 return (
                   <td style={{border: '2px solid black', textAlign: 'center'}} 
                   key={`${idx}-${index}`}>{idx === index ? 'X' : `${resWhite} : ${resBlack}`}</td>
@@ -58,6 +52,20 @@ class CrossTable extends React.Component {
         </table>
       </div>
     );
+  }
+
+  getResult(whiteID, blackID) {
+    const resArray = this.props.results.filter(result => {
+      return result.whiteID === whiteID && result.blackID === blackID;
+    });
+    let result = -1;
+    if (resArray.length) {
+      const matchingResult = resArray[resArray.length-1];
+      if (matchingResult.result !== -1) {
+        return result = matchingResult.result;
+      }
+    }
+    return result;
   }
 }
 

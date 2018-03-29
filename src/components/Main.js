@@ -17,12 +17,13 @@ class Main extends React.Component {
   }
 
   render() {
-    const players = this.props.players;
+    const { players, results} = this.props;
+    console.log(this.props);
     return (
       <div>
         <h3>Tournament</h3>
         <PlayerList players={players} />
-        <CrossTable players={players} />
+        <CrossTable players={players} results={results} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
           saveResult={this.saveResult.bind(this)} />
@@ -78,9 +79,11 @@ class Main extends React.Component {
         blackID,
         result: -1
       };
-      if (! alreadyPaired.get(whiteID)) {
+      if (! alreadyPaired.get(whiteID) &&
+          ! alreadyPaired.get(blackID)) {
         pairings.push(pObj);
         alreadyPaired.set(whiteID, true);
+        alreadyPaired.set(blackID, true);
       }
     });
     return pairings;
@@ -113,7 +116,8 @@ class Main extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    players: state.players
+    players: state.players,
+    results: state.results
   };
 };
 const mapDispatchToProps = (dispatch) => {

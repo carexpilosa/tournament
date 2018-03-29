@@ -19,19 +19,16 @@ class Input extends React.Component {
   }
 
   onKeyDown(e) {
-    console.log('onKeyDown');
     if(e.key === 'Enter') {
-      this.props.insertPlayer(e.target.value);
+      this.aOnClick();
     }
   }
 
-  aOnClick(e) {
-    console.log('aOnClick');
+  aOnClick() {
     this.props.insertPlayer(this.textInput.value);
   }
 
   onChange(e) {
-    console.log('onChange');
     this.setState({
       inputValue: e.target.value
     });

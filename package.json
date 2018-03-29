@@ -26,5 +26,10 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot",
     "build": "./node_modules/.bin/webpack --config webpack.config.prod.js"
+  },
+  "devDependencies": {
+    "chromedriver": "^2.37.0",
+    "nightwatch": "^0.9.20",
+    "selenium-server": "^3.11.0"
   }
 }
