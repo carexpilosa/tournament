@@ -26,8 +26,8 @@
     "start": "npm run build",
     "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot",
     "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
-    "stest": "./node_modules/.bin/nightwatch",
-    "jtest": "./node_modules/.bin/jest --config=jest.config.js"
+    "selenium": "./node_modules/.bin/nightwatch",
+    "test": "./node_modules/.bin/jest --config=jest.config.js"
   },
   "devDependencies": {
     "chromedriver": "^2.37.0",
