@@ -1,1 +1,1 @@
-# boilerplate test: redux store
+# Tournament Administration
