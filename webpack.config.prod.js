@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 const path = require('path');
 
 module.exports = {
@@ -17,12 +19,12 @@ module.exports = {
       {
         test: /\.(css)$/,
         use: [{
-          loader: "style-loader",
+          loader: 'style-loader',
           options: {
             sourceMap: true
           }
         }, {
-          loader: "css-loader",
+          loader: 'css-loader',
           options: {
             sourceMap: true
           }

@@ -4,9 +4,9 @@ class CrossTable extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
-    const { players, results } = this.props;
+    const { players } = this.props;
     return (
       <div>
         <h4>Cross Table</h4>
@@ -25,7 +25,7 @@ class CrossTable extends React.Component {
         </tr>
         {
           players.map((sp, idx) => {
-            return <tr key={`${idx}-1`}><td 
+            return <tr key={`${idx}-1`}><td
               style={{
                 border: '2px solid black',
                 textAlign: 'right',
@@ -34,14 +34,14 @@ class CrossTable extends React.Component {
             {
               players.map((sp, index) => {
                 const result = this.getResult(idx, index).toString();
-                const [resWhite, resBlack] = 
-                  result === '0' ? ['0', '1'] : 
+                const [resWhite, resBlack] =
+                  result === '0' ? ['0', '1'] :
                     result === '0.5' ? ['0.5', '0.5'] :
                       result === '1' ? ['1', '0'] : ['-', '-'];
 
                 return (
-                  <td style={{border: '2px solid black', textAlign: 'center'}} 
-                  key={`${idx}-${index}`}>{idx === index ? 'X' : `${resWhite} : ${resBlack}`}</td>
+                  <td style={{border: '2px solid black', textAlign: 'center'}}
+                    key={`${idx}-${index}`}>{idx === index ? 'X' : `${resWhite} : ${resBlack}`}</td>
                 );
               })
             }

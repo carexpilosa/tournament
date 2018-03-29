@@ -4,7 +4,7 @@ class PlayerList extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     const players = this.props.players;
     return (

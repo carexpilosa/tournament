@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
+
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   devServer: {
@@ -7,19 +8,19 @@ module.exports = {
     historyApiFallback: {
       index: '/'
     },
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: { 'Access-Control-Allow-Origin': '*' },
     open: true,
     openPage: ''
   },
   entry: {
     src: [
-      "./src/index.js"
+      './src/index.js'
     ]
   },
   output: {
-    path: path.resolve(__dirname, "/dist"),
-    publicPath: "/dist",
-    filename: "bundle.js"
+    path: path.resolve(__dirname, '/dist'),
+    publicPath: '/dist',
+    filename: 'bundle.js'
   },
   devtool: 'cheap-module-eval-source-map',
   module: {
@@ -33,12 +34,12 @@ module.exports = {
       {
         test: /\.(css)$/,
         use: [{
-          loader: "style-loader",
+          loader: 'style-loader',
           options: {
             sourceMap: true
           }
         }, {
-          loader: "css-loader",
+          loader: 'css-loader',
           options: {
             sourceMap: true
           }

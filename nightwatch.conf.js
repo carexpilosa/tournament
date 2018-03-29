@@ -1,4 +1,5 @@
-//require('env2')('.env'); // optionally store youre Evironment Variables in .env
+/* eslint-disable no-undef */
+// require('env2')('.env'); // optionally store youre Evironment Variables in .env
 const seleniumServer = require('selenium-server');
 const chromedriver = require('chromedriver');
 
@@ -7,7 +8,7 @@ module.exports = {
   'src_folders': [
     'tests' // Where you are storing your Nightwatch e2e tests
   ],
-  'output_folder': './reports', // reports (test outcome) output by nightwatch
+  // 'output_folder': './reports', // reports (test outcome) output by nightwatch
   'selenium': {
     'start_process': true, // tells nightwatch to start/stop the selenium process
     'server_path': seleniumServer.path,
@@ -18,7 +19,6 @@ module.exports = {
     }
   },
   'test_settings': {
-    
     'default': {
       'screenshots': {
         'enabled': true, // if you want to keep screenshots

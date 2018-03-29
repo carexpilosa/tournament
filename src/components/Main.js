@@ -13,12 +13,11 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    
+
   }
 
   render() {
     const { players, results} = this.props;
-    console.log(this.props);
     return (
       <div>
         <h3>Tournament</h3>
@@ -61,7 +60,7 @@ class Main extends React.Component {
         break;
       }
     }
-    return opponentId || 0; //opponentId is never 0
+    return opponentId || 0; // opponentId is never 0
   }
 
   getPairings(roundNumber) {

@@ -7,7 +7,7 @@ class Input extends React.Component {
       inputValue: ''
     };
   }
-  
+
   render() {
     return (
       <div>
