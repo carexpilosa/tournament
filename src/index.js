@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 
 import { store } from './reducers';
-import Main from './components/Tournament/Main';
+import Main from './components/Main';
 import './styles/styles.css';
 
 

@@ -5,7 +5,7 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
-import { updatePlayers, updateResults } from '../../actions';
+import { updatePlayers, updateResults } from '../actions';
 
 class Main extends React.Component {
   constructor(props) {
