@@ -5,5 +5,9 @@ export function updatePlayers(data) {
   };
 }
 
-
-
+export function updateResults(data) {
+  return {
+    type: 'UPDATE_RESULTS',
+    data
+  };
+}

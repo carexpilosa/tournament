@@ -29,7 +29,7 @@ class CrossTable extends React.Component {
                 border: '2px solid black',
                 textAlign: 'right',
                 fontWeight: 'bold'
-              }}>{idx}. {sp.name}</td>
+              }}>{idx + 1} {sp.name}</td>
             {
               players.map((sp, index) => {
                 /*const res = this.props.results.filter(result => {

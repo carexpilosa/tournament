@@ -5,7 +5,7 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
-import { updatePlayers } from '../../actions';
+import { updatePlayers, updateResults } from '../../actions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class Main extends React.Component {
         <PlayerList players={players} />
         <CrossTable players={players} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
-        <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)} />
+        <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
+          saveResult={this.saveResult.bind(this)} />
       </div>
     );
   }
@@ -66,6 +67,7 @@ class Main extends React.Component {
     const players = this.props.players;
     const numberOfPlayers = players.length;
     const pairings = [];
+    let alreadyPaired = new Map();
     players.forEach((player, idx) => {
       if(idx === 0) return;
       const opponentNumber = this.getOpponentId(numberOfPlayers, roundNumber, idx);
@@ -76,7 +78,10 @@ class Main extends React.Component {
         blackID,
         result: -1
       };
-      pairings.push(pObj);
+      if (! alreadyPaired.get(whiteID)) {
+        pairings.push(pObj);
+        alreadyPaired.set(whiteID, true);
+      }
     });
     return pairings;
   }
@@ -95,6 +100,15 @@ class Main extends React.Component {
     }
     return ret;
   }
+
+  saveResult(e, round, whiteID, blackID) {
+    this.props.updateResults([{
+      result: e.target.value,
+      round,
+      whiteID,
+      blackID
+    }]);
+  }
 }
 
 const mapStateToProps = state => {
@@ -104,7 +118,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    updatePlayers: (data) => dispatch(updatePlayers(data))
+    updatePlayers: (data) => dispatch(updatePlayers(data)),
+    updateResults: (data) => dispatch(updateResults(data))
   };
 };
 

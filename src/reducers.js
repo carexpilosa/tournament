@@ -8,8 +8,17 @@ export function playersReducer(state={}, action) {
   }
 }
 
+export function resultsReducer(state={}, action) {
+  switch (action.type) {
+    case 'UPDATE_RESULTS':
+      return [ ...state, ...action.data ];
+    default: return state;
+  }
+}
+
 const rootReducer = combineReducers({
-  players: playersReducer
+  players: playersReducer,
+  results: resultsReducer
 });
 
 const initialState = {
@@ -30,7 +39,8 @@ const initialState = {
       name: 'Fred',
       id: 3
     }
-  ]
+  ],
+  results: []
 };
 
 export const store = createStore(
