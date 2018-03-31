@@ -7,3 +7,40 @@
 div {
   /*border: 1px solid blue*/
 }
+
+.pairingsOuterDiv {
+  display: flex;
+  width: 580px;
+}
+
+.pairingsInnerDivWhite {
+  width: 390px;
+  display: flex;
+  background-color: white;
+}
+
+.pairingsInnerDivGray {
+  width: 390px;
+  display: flex;
+  background-color: gray;
+}
+
+.pairingsPairingLeftDiv {
+  width: 170px;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.pairingsPairingRightDiv {
+  width: 170px;
+  text-align: left;
+  margin-right: 8px;
+}
+
+.pairingsResultSelect {
+  text-align-last: center;
+}
+
+.pairingsResultDiv {
+  width: 90px;
+}

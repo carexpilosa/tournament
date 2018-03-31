@@ -12,9 +12,27 @@ module.exports = {
         'Weller Friedrich')
       // .click('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select option[value=0.5]')
       .waitForElementVisible('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select/option[4]')
-      .click('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select/option[3]')
       .waitForElementVisible('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select')
+
+      .click('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select/option[3]')
       .assert.value('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select', '0.5')
+      .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[3]/td[6]', '0.5 : 0.5')
+
+      .click('//*[@id="app"]/div/div/div[4]/div[1]/div[2]/div/div[2]/select/option[3]')
+      .assert.value('//*[@id="app"]/div/div/div[4]/div[1]/div[2]/div/div[2]/select', '0.5')
+      .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[4]/td[5]', '0.5 : 0.5')
+
+      .click('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select/option[3]')
+      .assert.value('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select', '0.5')
+      .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[2]/td[3]', '0.5 : 0.5')
+
+
+      
+
+      
+
+      
+
       .end();
   }
 };
