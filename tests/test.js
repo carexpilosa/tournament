@@ -8,12 +8,14 @@ module.exports = {
       .setValue('//*[@id="app"]/div/div/div[3]/input', 'Weller Friedrich')
       .click('//*[@id="app"]/div/div/div[3]/a')
       .waitForElementVisible('//*[@id="app"]/div/div/div[2]/table/tbody/tr[6]/td[1]')
+
+      // add Friedrich Weller
       .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[6]/td[1]',
         'Weller Friedrich')
-      // .click('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select option[value=0.5]')
       .waitForElementVisible('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select/option[4]')
       .waitForElementVisible('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select')
 
+      // first Result set remis
       .click('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select/option[3]')
       .assert.value('//*[@id="app"]/div/div/div[4]/div[1]/div[1]/div/div[2]/select', '0.5')
       .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[3]/td[6]', '0.5 : 0.5')
@@ -25,13 +27,6 @@ module.exports = {
       .click('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select/option[3]')
       .assert.value('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select', '0.5')
       .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[2]/td[3]', '0.5 : 0.5')
-
-
-      
-
-      
-
-      
 
       .end();
   }

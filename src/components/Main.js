@@ -104,12 +104,21 @@ class Main extends React.Component {
   }
 
   saveResult(e, round, whiteID, blackID) {
-    this.props.updateResults([{
+    this.props.updateResults({
       result: e.target.value,
       round,
       whiteID,
       blackID
-    }]);
+    });
+  }
+
+  getResult(whiteID, blackID) {
+    const results = this.props.results;
+    const filteredResults = results.filter((result) => {
+      return result.whiteID === whiteID &&
+        result.blackID === blackID;
+    });
+    return filteredResults;
   }
 }
 

@@ -8,10 +8,23 @@ export function playersReducer(state={}, action) {
   }
 }
 
-export function resultsReducer(state={}, action) {
+export function resultsReducer(state=[], action) {
+  let newState = [...state],
+    replaced;
   switch (action.type) {
-    case 'UPDATE_RESULTS':
-      return [ ...state, ...action.data ];
+    case 'ADD_ONE_RESULT':
+      replaced = false;
+      newState.forEach((res, idx) => {
+        if (parseInt(res.whiteID) === parseInt(action.data.whiteID) &&
+            parseInt(res.blackID) === parseInt(action.data.blackID)) {
+          newState[idx] = action.data;
+          replaced = true;
+        }
+      });
+      if (!replaced) {
+        newState.push(action.data);
+      }
+      return [ ...newState ];
     default: return state;
   }
 }

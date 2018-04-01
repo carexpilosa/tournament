@@ -27,7 +27,8 @@
     "dev": "./node_modules/.bin/webpack-dev-server --progress --colors --hot",
     "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
     "selenium": "./node_modules/.bin/nightwatch",
-    "test": "./node_modules/.bin/jest --config=jest.config.js"
+    "test": "./node_modules/.bin/jest --config=jest.config.js",
+    "lint": "./node_modules/.bin/eslint '**/*.js'"
   },
   "devDependencies": {
     "chromedriver": "^2.37.0",
