@@ -26,6 +26,8 @@ class Input extends React.Component {
 
   aOnClick() {
     this.props.insertPlayer(this.textInput.value);
+    this.textInput.value = '';
+    this.textInput.focus();
   }
 
   onChange(e) {

@@ -44,3 +44,19 @@ div {
 .pairingsResultDiv {
   width: 90px;
 }
+
+#crossTable > tbody > tr > td {
+  min-width: 60px;
+  background-color: yellow;
+}
+
+.crossTableThLeft {
+  border: 2px solid black;
+  text-align: right;
+  font-weight: bold;
+}
+
+.crossTableThTop {
+  border: 2px solid black;
+  font-weight: bold;
+}

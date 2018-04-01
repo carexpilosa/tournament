@@ -10,27 +10,20 @@ class CrossTable extends React.Component {
     return (
       <div>
         <h4>Cross Table</h4>
-        <table>
+        <table id="crossTable">
           <tbody>
           <tr><td></td>
         {
           players.map((sp, idx) => {
-            return <td style={{
-              border: '2px solid black',
-              fontWeight: 'bold'
-            }} key={idx}>
+            return <td className="crossTableThTop" key={idx}>
               {sp.name.length > 5 ? `${sp.name.substr(0,4)}...` : sp.name}</td>;
           })
         }
         </tr>
         {
           players.map((sp, idx) => {
-            return <tr key={`${idx}-1`}><td
-              style={{
-                border: '2px solid black',
-                textAlign: 'right',
-                fontWeight: 'bold'
-              }}>{idx + 1} {sp.name}</td>
+            return <tr key={`${idx}-1`}>
+              <td className="crossTableThLeft">{idx + 1} {sp.name}</td>
             {
               players.map((sp, index) => {
                 const result = this.getResult(idx, index).toString();
