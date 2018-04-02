@@ -7,6 +7,7 @@ class CrossTable extends React.Component {
 
   render() {
     const { players } = this.props;
+    console.log(players);
     return (
       <div>
         <h4>Cross Table</h4>

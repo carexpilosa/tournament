@@ -7,7 +7,7 @@ import { store } from './reducers';
 import Main from './components/Main';
 import './styles/styles.css';
 
-
+console.log('hae?');
 ReactDOM.render(
   <Provider store={store}>
     <div>

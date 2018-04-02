@@ -5,7 +5,13 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
-import { updatePlayers, updateResults } from '../actions';
+import {
+  updatePlayers,
+  deleteAllPlayers,
+  examplePlayers,
+  updateResults,
+  deleteAllResults
+} from '../actions';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,9 +24,12 @@ class Main extends React.Component {
 
   render() {
     const { players, results} = this.props;
+    console.log(players, results);
     return (
       <div>
         <h3>Tournament</h3>
+        <a href="#" onClick={() => this.renew()}>neustart</a><br/>
+        <a href="#" onClick={() => this.example()}>example</a><br/>
         <PlayerList players={players} />
         <CrossTable players={players} results={results} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
@@ -28,6 +37,17 @@ class Main extends React.Component {
           saveResult={this.saveResult.bind(this)} />
       </div>
     );
+  }
+
+  renew() {
+    this.props.deleteAllPlayers();
+    this.props.deleteAllResults();
+  }
+
+  example() {
+    console.log('----------------');
+    this.props.examplePlayers();
+    //this.props.deleteAllResults();
   }
 
   insertPlayer(playerName) {
@@ -131,7 +151,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updatePlayers: (data) => dispatch(updatePlayers(data)),
-    updateResults: (data) => dispatch(updateResults(data))
+    deleteAllPlayers: () => dispatch(deleteAllPlayers()),
+    examplePlayers: () => dispatch(examplePlayers()),
+    updateResults: (data) => dispatch(updateResults(data)),
+    deleteAllResults: () => dispatch(deleteAllResults())
   };
 };
 
