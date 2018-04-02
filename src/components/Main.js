@@ -19,7 +19,7 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-
+    // this.example();
   }
 
   render() {
@@ -28,8 +28,8 @@ class Main extends React.Component {
     return (
       <div>
         <h3>Tournament</h3>
-        <a href="#" onClick={() => this.renew()}>neustart</a><br/>
-        <a href="#" onClick={() => this.example()}>example</a><br/>
+        <button onClick={() => this.cleanPlayers()}>reset</button><br/>
+        <button onClick={() => this.example()}>reset to example players</button><br/>
         <PlayerList players={players} />
         <CrossTable players={players} results={results} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
@@ -39,22 +39,23 @@ class Main extends React.Component {
     );
   }
 
-  renew() {
+  cleanPlayers() {
     this.props.deleteAllPlayers();
     this.props.deleteAllResults();
   }
 
   example() {
-    console.log('----------------');
     this.props.examplePlayers();
-    //this.props.deleteAllResults();
+    this.props.deleteAllResults();
   }
 
   insertPlayer(playerName) {
-    this.props.updatePlayers([{
-      name: playerName,
-      id: this.getHighestPlayerId() + 1
-    }]);
+    if (playerName) {
+      this.props.updatePlayers([{
+        name: playerName,
+        id: this.getHighestPlayerId() + 1
+      }]);
+    }
   }
 
   getHighestPlayerId() {

@@ -5,14 +5,24 @@ export function playersReducer(state=[], action) {
     case 'UPDATE_PLAYERS':
       return [ ...state, ...action.data ];
     case 'EXAMPLE_PLAYERS':
-      return [ {
-        name: 'Paul',
-        id: 1
-      },
-      {
-        name: 'Peter',
-        id: 2
-      }];
+      return [
+        {
+          name: 'Horst',
+          id: 0
+        },
+        {
+          name: 'Hugo',
+          id: 1
+        },
+        {
+          name: 'Anton',
+          id: 2
+        },
+        {
+          name: 'Fred',
+          id: 3
+        }
+      ];
     case 'DELETE_ALL_PLAYERS':
       return [];
     default: return state;

@@ -6,21 +6,15 @@ module.exports = {
       .waitForElementVisible('//html/body', 1000)
       .waitForElementVisible('//*[@id="app"]/div/div/div[3]/input')
 
-      .setValue('//*[@id="app"]/div/div/div[3]/input', 'Horst')
-      .click('//*[@id="app"]/div/div/div[3]/a')
+      .click('//*[@id="app"]/div/div/button[2]')
 
-      .setValue('//*[@id="app"]/div/div/div[3]/input', 'Hugo')
-      .click('//*[@id="app"]/div/div/div[3]/a')
-
-      .setValue('//*[@id="app"]/div/div/div[3]/input', 'Anton')
-      .click('//*[@id="app"]/div/div/div[3]/a')
-
-      .setValue('//*[@id="app"]/div/div/div[3]/input', 'Fred')
-      .click('//*[@id="app"]/div/div/div[3]/a')
+      .waitForElementVisible('//*[@id="crossTable"]/tbody/tr[5]/td[2]')
 
       .setValue('//*[@id="app"]/div/div/div[3]/input', 'Weller Friedrich')
       .click('//*[@id="app"]/div/div/div[3]/a')
       .waitForElementVisible('//*[@id="app"]/div/div/div[2]/table/tbody/tr[6]/td[1]')
+
+      .waitForElementVisible('//*[@id="crossTable"]/tbody/tr[6]/td[2]')
 
       // add Friedrich Weller
       .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[6]/td[1]',
@@ -40,8 +34,6 @@ module.exports = {
       .click('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select/option[3]')
       .assert.value('//*[@id="app"]/div/div/div[4]/div[2]/div[1]/div/div[2]/select', '0.5')
       .assert.containsText('//*[@id="app"]/div/div/div[2]/table/tbody/tr[2]/td[3]', '0.5 : 0.5')
-
-      .pause(10000)
 
       .end();
   }
