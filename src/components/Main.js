@@ -19,7 +19,7 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    // this.example();
+    this.example();
   }
 
   render() {
@@ -30,7 +30,8 @@ class Main extends React.Component {
         <h3>Tournament</h3>
         <button onClick={() => this.cleanPlayers()}>reset</button><br/>
         <button onClick={() => this.example()}>reset to example players</button><br/>
-        <PlayerList players={players} />
+        <PlayerList players={players} updatePlayers={this.props.updatePlayers}
+          getPlayerById={this.getPlayerById.bind(this)} />
         <CrossTable players={players} results={results} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
@@ -140,6 +141,17 @@ class Main extends React.Component {
         result.blackID === blackID;
     });
     return filteredResults;
+  }
+
+  getPlayerById(id) {
+    const players = this.props.players;
+    const filtered = players.filter(player => {
+      return player.id === id;
+    });
+    if (filtered.length > 1) {
+      console.log('errrrrrrrr');
+    }
+    return filtered[0];
   }
 }
 

@@ -1,9 +1,10 @@
 import { createStore, combineReducers } from 'redux';
+// import { removeAllListeners } from 'cluster';
 
 export function playersReducer(state=[], action) {
   switch (action.type) {
     case 'UPDATE_PLAYERS':
-      return [ ...state, ...action.data ];
+      return updateArrayOfObjects([...state], action.data, ['id']);
     case 'EXAMPLE_PLAYERS':
       return [
         {
@@ -47,7 +48,6 @@ export function resultsReducer(state=[], action) {
       }
       return [ ...newState ];
     case 'DELETE_ALL_RESULTS':
-      console.log('DELETE_ALL_RESULTS');
       return [];
     default: return state;
   }
@@ -69,3 +69,23 @@ export const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const updateArrayOfObjects = (array, newOrChangedObject, keysToCheck) => {
+  let replaced = false;
+  console.log(newOrChangedObject);
+  array.forEach((res, idx) => {
+    let allKeysEqual = true;
+    keysToCheck.forEach(key => {
+      if (res[key] !== newOrChangedObject[key]) {
+        allKeysEqual = false;
+      }
+    });
+    if (allKeysEqual) {
+      array[idx] = newOrChangedObject;
+      replaced = true;
+    }
+  });
+  if (!replaced) {
+    array.push(newOrChangedObject);
+  }
+  return array;
+};
