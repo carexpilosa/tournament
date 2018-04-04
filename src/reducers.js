@@ -35,18 +35,7 @@ export function resultsReducer(state=[], action) {
     replaced;
   switch (action.type) {
     case 'ADD_ONE_RESULT':
-      replaced = false;
-      newState.forEach((res, idx) => {
-        if (parseInt(res.whiteID) === parseInt(action.data.whiteID) &&
-            parseInt(res.blackID) === parseInt(action.data.blackID)) {
-          newState[idx] = action.data;
-          replaced = true;
-        }
-      });
-      if (!replaced) {
-        newState.push(action.data);
-      }
-      return [ ...newState ];
+      return updateArrayOfObjects([...state], action.data, ['whiteID', 'blackID']);
     case 'DELETE_ALL_RESULTS':
       return [];
     default: return state;
@@ -71,7 +60,6 @@ export const store = createStore(
 
 const updateArrayOfObjects = (array, newOrChangedObject, keysToCheck) => {
   let replaced = false;
-  console.log(newOrChangedObject);
   array.forEach((res, idx) => {
     let allKeysEqual = true;
     keysToCheck.forEach(key => {
