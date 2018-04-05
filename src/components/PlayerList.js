@@ -11,8 +11,24 @@ class PlayerList extends React.Component {
 
   render() {
     const players = this.props.players;
+    let divs = [];
+    players.map((sp, idx) => {
+      divs.push(<div>{sp.id} {sp.name}</div>);
+      divs.push(<div><button>go</button></div>);
+      divs.push(<div><button>show</button></div>);
+    });
+
     return (
       <div>
+        <div style={{
+          paddingTop: '30px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, max-content)',
+          gridColumnGap: '0.2em',
+          gridRowGap: '0.2em'
+        }}>
+          {divs}
+        </div>
         <h4>List Of Players</h4>
           <table>
             <tbody>
