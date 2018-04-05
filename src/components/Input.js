@@ -13,18 +13,18 @@ class Input extends React.Component {
       <div>
         <input onChange={this.onChange.bind(this)} type="text" onKeyDown={this.onKeyDown.bind(this)}
           ref={(input) => { this.textInput = input; }} />
-        <a href="#" onClick={this.aOnClick.bind(this)}>add</a>
+        <button onClick={this.buttonOnClick.bind(this)}>add</button>
       </div>
     );
   }
 
   onKeyDown(e) {
     if(e.key === 'Enter') {
-      this.aOnClick();
+      this.buttonOnClick();
     }
   }
 
-  aOnClick() {
+  buttonOnClick() {
     this.props.insertPlayer(this.textInput.value);
     this.textInput.value = '';
     this.textInput.focus();

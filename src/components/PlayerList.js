@@ -41,7 +41,7 @@ class PlayerList extends React.Component {
   }
 
   inputKeyPress(e) {
-    console.log(e);
+    console.log('inputKeyPress');
   }
 
   mobileEdit(e, idx) {

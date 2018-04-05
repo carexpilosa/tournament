@@ -24,7 +24,6 @@ class Main extends React.Component {
 
   render() {
     const { players, results} = this.props;
-    console.log(players, results);
     return (
       <div>
         <h3>Tournament</h3>
@@ -32,8 +31,8 @@ class Main extends React.Component {
         <button onClick={() => this.example()}>reset to example players</button><br/>
         <PlayerList players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} />
-        <CrossTable players={players} results={results} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
+        <CrossTable players={players} results={results} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
           saveResult={this.saveResult.bind(this)} />
       </div>
