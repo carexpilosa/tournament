@@ -13,13 +13,24 @@ class PlayerList extends React.Component {
     const players = this.props.players;
     let divs = [];
     players.map((sp, idx) => {
-      divs.push(<div>{sp.id} {sp.name}</div>);
-      divs.push(<div><button>go</button></div>);
-      divs.push(<div><button>show</button></div>);
+      divs.push(this.state.idOfPlayerToEdit === idx
+        ? <div>
+            <input type="text" defaultValue={sp.name}
+              onChange={this.updatePlayerName.bind(this)}
+              onKeyPress={this.inputKeyPress} />
+          </div>
+        : <div style={{border: '1px solid green'}}>{sp.id} {sp.name}</div>);
+      divs.push(this.state.idOfPlayerToEdit === idx
+        ? <button onClick={this.updatePlayer.bind(this)}>ok</button>
+        : <div><button onClick={e => this.edit(e, idx)}>edit</button></div>);
+      divs.push(this.state.idOfPlayerToEdit === idx
+        ? <div></div>
+        : <div><button>delete</button></div>);
     });
 
     return (
       <div>
+        <h4>List Of Players</h4>
         <div style={{
           paddingTop: '30px',
           display: 'grid',
@@ -29,30 +40,7 @@ class PlayerList extends React.Component {
         }}>
           {divs}
         </div>
-        <h4>List Of Players</h4>
-          <table>
-            <tbody>
-            {
-              players.map((sp, idx) => {
-                return this.state.idOfPlayerToEdit === idx
-                  ? <tr key={idx}>
-                      <td colSpan="3">
-                        <input type="text" defaultValue={sp.name}
-                          onChange={this.updatePlayerName.bind(this)}
-                          onKeyPress={this.inputKeyPress} />
-                        <button onClick={this.updatePlayer.bind(this)}>ok</button>
-                      </td>
-                    </tr>
-                  : <tr key={idx}>
-                      <td>{sp.id} {sp.name}</td>
-                      <td><button onClick={e => this.edit(e, idx)}>edit</button></td>
-                      <td><button>delete</button></td>
-                    </tr>;
-              })
-            }
-            </tbody>
-          </table>
-        </div>
+      </div>
     );
   }
 
