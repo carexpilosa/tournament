@@ -14,24 +14,39 @@ class PlayerList extends React.Component {
     return (
       <div>
         <h4>List Of Players</h4>
-        <ul>
-        {
-          players.map((sp, idx) => {
-            return this.state.idOfPlayerToEdit === idx
-              ? <li key={idx}>{idx + 1} <input type ="text" id={`pl${idx}`}
-                  defaultValue={sp.name} onChange={this.updatePlayerName.bind(this)} />
-                  <button onClick={this.updatePlayer.bind(this)}>ok</button></li>
-              : <div key={idx} style={{width: '200px', height: '1.5em', border: '1px solid red'}}>
-                  <li style={{display: 'inline'}} onDoubleClick={(e) => this.iedit(e, idx)}>
-                    {idx + 1} {sp.name}</li>
-                  <button onClick={e => this.edit(e, idx)}>edit</button>
-                  <button>delete</button>
-                </div>;
-          })
-        }
-        </ul>
-      </div>
+          <table>
+            <tbody>
+            {
+              players.map((sp, idx) => {
+                return this.state.idOfPlayerToEdit === idx
+                  ? <tr key={idx}>
+                      <td colSpan="3">
+                        <input type="text" defaultValue={sp.name}
+                          onChange={this.updatePlayerName.bind(this)}
+                          onKeyPress={this.inputKeyPress} />
+                        <button onClick={this.updatePlayer.bind(this)}>ok</button>
+                      </td>
+                    </tr>
+                  : <tr key={idx}>
+                      <td>{sp.id} {sp.name}</td>
+                      <td><button onClick={e => this.edit(e, idx)}>edit</button></td>
+                      <td><button>delete</button></td>
+                    </tr>;
+              })
+            }
+            </tbody>
+          </table>
+        </div>
     );
+  }
+
+  inputKeyPress(e) {
+    console.log(e);
+  }
+
+  mobileEdit(e, idx) {
+    e.preventDefault();
+    this.edit(e, idx);
   }
 
   edit(e, idx) {
@@ -55,6 +70,10 @@ class PlayerList extends React.Component {
         name: playerNameEdited
       });
     }
+    this.setState({
+      idOfPlayerToEdit: undefined,
+      playerNameEdited: ''
+    });
   }
 }
 

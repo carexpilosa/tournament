@@ -52,10 +52,10 @@ class Main extends React.Component {
 
   insertPlayer(playerName) {
     if (playerName) {
-      this.props.updatePlayers([{
+      this.props.updatePlayers({
         name: playerName,
         id: this.getHighestPlayerId() + 1
-      }]);
+      });
     }
   }
 

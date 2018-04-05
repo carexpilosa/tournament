@@ -8,19 +8,19 @@ export function playersReducer(state=[], action) {
     case 'EXAMPLE_PLAYERS':
       return [
         {
-          name: 'Horst',
+          name: 'Horst-Hermann',
           id: 0
         },
         {
-          name: 'Hugo',
+          name: 'Hugo-Ewald',
           id: 1
         },
         {
-          name: 'Anton',
+          name: 'Antonio',
           id: 2
         },
         {
-          name: 'Fred',
+          name: 'Fred-Erich',
           id: 3
         }
       ];
@@ -31,8 +31,6 @@ export function playersReducer(state=[], action) {
 }
 
 export function resultsReducer(state=[], action) {
-  let newState = [...state],
-    replaced;
   switch (action.type) {
     case 'ADD_ONE_RESULT':
       return updateArrayOfObjects([...state], action.data, ['whiteID', 'blackID']);

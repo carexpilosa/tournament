@@ -1,4 +1,5 @@
 export function updatePlayers(data) {
+  console.log(data);
   return {
     type: 'UPDATE_PLAYERS',
     data
