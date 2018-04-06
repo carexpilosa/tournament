@@ -5,6 +5,7 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
+import Ranking from './Ranking';
 import {
   updatePlayers,
   deleteAllPlayers,
@@ -32,6 +33,7 @@ class Main extends React.Component {
         <PlayerList players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
+        <Ranking players={players} results={results} />
         <CrossTable players={players} results={results} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
           saveResult={this.saveResult.bind(this)} />

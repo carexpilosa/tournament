@@ -10,30 +10,40 @@ class PlayerList extends React.Component {
   }
 
   render() {
-    const players = this.props.players;
-    const divs = [];
+    const { players, results } = this.props;
+    let keyCounter = 0;
+    let divs = [
+      <div key={`k${keyCounter++}`}>Name</div>,
+      <div key={`k${keyCounter++}`}>Pkt</div>,
+      <div key={`k${keyCounter++}`}></div>,
+      <div key={`k${keyCounter++}`}>Spiele</div>
+    ];
     players.forEach(sp => {
-      divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <div>
-            <input type="text" defaultValue={sp.name}
-              onChange={this.updatePlayerName.bind(this)}
-              onKeyPress={this.inputKeyPress} />
-          </div>
-        : <div style={{border: '1px solid green'}}>{sp.id} {sp.name}</div>);
-      divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <button onClick={this.updatePlayer.bind(this)}>ok</button>
-        : <div><button onClick={e => this.edit(e, sp.id)}>edit</button></div>);
-      divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <div></div>
-        : <div><button>delete</button></div>);
+      divs.push(<div key={`k${keyCounter++}`}>{sp.name}</div>);
+      const obj = results.reduce((zwErgebnis, elm, idx) => {
+        if (typeof elm.result !== undefined && elm.result !== -1) {
+          if (elm.whiteID === sp.id) {
+            zwErgebnis.points += parseFloat(elm.result);
+            zwErgebnis.numberOfGames += 1;
+          } else if (elm.blackID === sp.id) {
+            zwErgebnis.points += (1 - parseFloat(elm.result));
+            zwErgebnis.numberOfGames += 1;
+          }
+          return zwErgebnis;
+        }
+      }, { points: 0, numberOfGames: 0 });
+      divs.push(<div key={`k${keyCounter++}`}
+        style={{textAlign: 'right', backgroundColor: 'green'}}>{obj.points}</div>);
+      divs.push(<div key={`k${keyCounter++}`}>/</div>);
+      divs.push(<div key={`k${keyCounter++}`}>{obj.numberOfGames}</div>);
     });
 
     return (
       <div>
-        <h4>List Of Players</h4>
+        <h4>Ranking</h4>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, max-content)',
+          gridTemplateColumns: 'repeat(4, max-content)',
           gridColumnGap: '0.2em',
           gridRowGap: '0.2em'
         }}>
