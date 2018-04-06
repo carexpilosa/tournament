@@ -128,7 +128,7 @@ class Main extends React.Component {
 
   saveResult(e, round, whiteID, blackID) {
     this.props.updateResults({
-      result: e.target.value,
+      result: parseFloat(e.target.value),
       round,
       whiteID,
       blackID

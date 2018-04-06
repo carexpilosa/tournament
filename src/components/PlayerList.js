@@ -12,20 +12,21 @@ class PlayerList extends React.Component {
   render() {
     const players = this.props.players;
     const divs = [];
+    let counter = 0;
     players.forEach(sp => {
       divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <div>
+        ? <div key={`d${counter++}`}>
             <input type="text" defaultValue={sp.name}
               onChange={this.updatePlayerName.bind(this)}
               onKeyPress={this.inputKeyPress} />
           </div>
-        : <div style={{border: '1px solid green'}}>{sp.id} {sp.name}</div>);
+        : <div key={`d${counter++}`} style={{border: '1px solid green'}}>{sp.id} {sp.name}</div>);
       divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <button onClick={this.updatePlayer.bind(this)}>ok</button>
-        : <div><button onClick={e => this.edit(e, sp.id)}>edit</button></div>);
+        ? <button key={`d${counter++}`} onClick={this.updatePlayer.bind(this)}>ok</button>
+        : <div key={`d${counter++}`}><button onClick={e => this.edit(e, sp.id)}>edit</button></div>);
       divs.push(this.state.idOfPlayerToEdit === sp.id
-        ? <div></div>
-        : <div><button>delete</button></div>);
+        ? <div key={`d${counter++}`}></div>
+        : <div key={`d${counter++}`}><button>delete</button></div>);
     });
 
     return (

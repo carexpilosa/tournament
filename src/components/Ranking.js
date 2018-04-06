@@ -1,6 +1,6 @@
 import React from 'react';
 
-class PlayerList extends React.Component {
+class Ranking extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class PlayerList extends React.Component {
   }
 
   render() {
-    const { players, results } = this.props;
+    const players = this.props.players;
     let keyCounter = 0;
     let divs = [
       <div key={`k${keyCounter++}`}>Name</div>,
@@ -18,20 +18,9 @@ class PlayerList extends React.Component {
       <div key={`k${keyCounter++}`}></div>,
       <div key={`k${keyCounter++}`}>Spiele</div>
     ];
-    players.forEach(sp => {
-      divs.push(<div key={`k${keyCounter++}`}>{sp.name}</div>);
-      const obj = results.reduce((zwErgebnis, elm, idx) => {
-        if (typeof elm.result !== undefined && elm.result !== -1) {
-          if (elm.whiteID === sp.id) {
-            zwErgebnis.points += parseFloat(elm.result);
-            zwErgebnis.numberOfGames += 1;
-          } else if (elm.blackID === sp.id) {
-            zwErgebnis.points += (1 - parseFloat(elm.result));
-            zwErgebnis.numberOfGames += 1;
-          }
-          return zwErgebnis;
-        }
-      }, { points: 0, numberOfGames: 0 });
+    players.forEach(player => {
+      const obj = this.calculatePoints(player);
+      divs.push(<div key={`k${keyCounter++}`}>{player.name}</div>);
       divs.push(<div key={`k${keyCounter++}`}
         style={{textAlign: 'right', backgroundColor: 'green'}}>{obj.points}</div>);
       divs.push(<div key={`k${keyCounter++}`}>/</div>);
@@ -51,6 +40,27 @@ class PlayerList extends React.Component {
         </div>
       </div>
     );
+  }
+
+  calculatePoints(player) {
+    const results = this.props.results;
+    let obj = results.reduce((zwErgebnis = { points: 0, numberOfGames: 0 },
+      elm, idx) => {
+      if (typeof elm.result !== undefined && parseFloat(elm.result) !== -1) {
+        if (elm.whiteID === player.id) {
+          zwErgebnis.points += parseFloat(elm.result);
+          zwErgebnis.numberOfGames += 1;
+        } else if (elm.blackID === player.id) {
+          zwErgebnis.points += (1 - parseFloat(elm.result));
+          zwErgebnis.numberOfGames += 1;
+        }
+      }
+      return zwErgebnis;
+    }, { points: 0, numberOfGames: 0 });
+    if (!obj) {
+      obj = { points: 0, numberOfGames: 0 };
+    }
+    return obj;
   }
 
   inputKeyPress(e) {
@@ -90,4 +100,4 @@ class PlayerList extends React.Component {
   }
 }
 
-export default PlayerList;
+export default Ranking;
