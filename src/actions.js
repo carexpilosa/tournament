@@ -11,9 +11,22 @@ export function deleteAllPlayers() {
   };
 }
 
+export function deletePlayer(id) {
+  return {
+    type: 'DELETE_PLAYER',
+    id
+  };
+}
+
 export function examplePlayers() {
   return {
     type: 'EXAMPLE_PLAYERS'
+  };
+}
+
+export function exampleResults() {
+  return {
+    type: 'EXAMPLE_RESULTS'
   };
 }
 

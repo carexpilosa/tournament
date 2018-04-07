@@ -9,7 +9,9 @@ import Ranking from './Ranking';
 import {
   updatePlayers,
   deleteAllPlayers,
+  deletePlayer,
   examplePlayers,
+  exampleResults,
   updateResults,
   deleteAllResults
 } from '../actions';
@@ -30,15 +32,20 @@ class Main extends React.Component {
         <h3>Tournament</h3>
         <button onClick={() => this.cleanPlayers()}>reset</button><br/>
         <button onClick={() => this.example()}>reset to example players</button><br/>
+        <button onClick={() => this.exampleResults()}>set example results</button><br/>
         <PlayerList players={players} updatePlayers={this.props.updatePlayers}
-          getPlayerById={this.getPlayerById.bind(this)} />
+          getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
         <Ranking players={players} results={results} />
         <CrossTable players={players} results={results} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
-          saveResult={this.saveResult.bind(this)} />
+          saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
       </div>
     );
+  }
+
+  exampleResults() {
+    this.props.exampleResults();
   }
 
   cleanPlayers() {
@@ -141,7 +148,7 @@ class Main extends React.Component {
       return result.whiteID === whiteID &&
         result.blackID === blackID;
     });
-    return filteredResults;
+    return filteredResults[0];
   }
 
   getPlayerById(id) {
@@ -166,7 +173,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updatePlayers: (data) => dispatch(updatePlayers(data)),
     deleteAllPlayers: () => dispatch(deleteAllPlayers()),
+    deletePlayer: (id) => dispatch(deletePlayer(id)),
     examplePlayers: () => dispatch(examplePlayers()),
+    exampleResults: () => dispatch(exampleResults()),
     updateResults: (data) => dispatch(updateResults(data)),
     deleteAllResults: () => dispatch(deleteAllResults())
   };

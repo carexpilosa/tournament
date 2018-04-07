@@ -26,7 +26,9 @@ class PlayerList extends React.Component {
         : <div key={`d${counter++}`}><button onClick={e => this.edit(e, sp.id)}>edit</button></div>);
       divs.push(this.state.idOfPlayerToEdit === sp.id
         ? <div key={`d${counter++}`}></div>
-        : <div key={`d${counter++}`}><button>delete</button></div>);
+        : <div key={`d${counter++}`} onClick={e => this.props.deletePlayer(sp.id)} >
+            <button>delete</button>
+          </div>);
     });
 
     return (
@@ -46,6 +48,10 @@ class PlayerList extends React.Component {
 
   inputKeyPress(e) {
     console.log('inputKeyPress');
+  }
+
+  deletePlayer(playerID) {
+    this.props.deletePlayer(playerID);
   }
 
   mobileEdit(e, idx) {

@@ -46,7 +46,7 @@ class Ranking extends React.Component {
     const results = this.props.results;
     let obj = results.reduce((zwErgebnis = { points: 0, numberOfGames: 0 },
       elm, idx) => {
-      if (typeof elm.result !== undefined && parseFloat(elm.result) !== -1) {
+      if (this.validResult(elm.result)) {
         if (elm.whiteID === player.id) {
           zwErgebnis.points += parseFloat(elm.result);
           zwErgebnis.numberOfGames += 1;
@@ -61,6 +61,15 @@ class Ranking extends React.Component {
       obj = { points: 0, numberOfGames: 0 };
     }
     return obj;
+  }
+
+  validResult(result) {
+    if (typeof result === undefined) {
+      return false;
+    }
+
+    const res = parseFloat(result);
+    return res === 0 || res === 0.5 || res === 1;
   }
 
   inputKeyPress(e) {

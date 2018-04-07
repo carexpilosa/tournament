@@ -19,13 +19,15 @@ class Pairings extends React.Component {
           Array.from(pairings).map(([round, val], index) => {
             const pairingsOfRound = val.map((pairing, idx) => {
               const { whiteID, blackID } = pairing;
+              const resultObj = this.props.getResult(whiteID, blackID);
+              const result = resultObj ? resultObj.result : -1;
               return <div key={idx} className="pairingsOuterDiv">
                 <div className={idx % 2 ? 'pairingsInnerDivWhite' : 'pairingsInnerDivGray'}>
                   <div className="pairingsPairingLeftDiv">
                     {players[whiteID].id + 1} {players[whiteID].name} { /* white King: */ } &#9812;
                   </div>
                   <div className="pairingsResultDiv">
-                    <select name={`${round}:${whiteID}_${blackID}`} defaultValue=""
+                    <select name={`${round}:${whiteID}_${blackID}`} value={result}
                       onChange={e => this.props.saveResult(e, round, whiteID, blackID)}
                       className="pairingsResultSelect">
                       <option value="-1">- : -</option>
