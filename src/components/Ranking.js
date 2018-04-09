@@ -18,14 +18,30 @@ class Ranking extends React.Component {
       <div key={`k${keyCounter++}`}></div>,
       <div key={`k${keyCounter++}`}>Spiele</div>
     ];
-    players.forEach(player => {
-      const obj = this.calculatePoints(player);
-      divs.push(<div key={`k${keyCounter++}`}>{player.name}</div>);
-      divs.push(<div key={`k${keyCounter++}`}
-        style={{textAlign: 'right', backgroundColor: 'green'}}>{obj.points}</div>);
-      divs.push(<div key={`k${keyCounter++}`}>/</div>);
-      divs.push(<div key={`k${keyCounter++}`}>{obj.numberOfGames}</div>);
-    });
+
+    const byPoints = (a, b) => {
+      return a.points < b.points ? 1
+        : b.points < a.points ? -1
+          : a.numberOfGames > b.numberOfGames ? 1
+            : b.numberOfGames > a.numberOfGames ? -1
+              : 0;
+    };
+
+    players
+      .map(player => {
+        return { ...player,
+          points: this.calculatePoints(player).points,
+          numberOfGames: this.calculatePoints(player).numberOfGames,
+        };
+      })
+      .sort(byPoints)
+      .forEach(sortedModifiedPlayer => {
+        divs.push(<div key={`k${keyCounter++}`}>{sortedModifiedPlayer.name}</div>);
+        divs.push(<div key={`k${keyCounter++}`}
+          style={{textAlign: 'right', backgroundColor: 'green'}}>{sortedModifiedPlayer.points}</div>);
+        divs.push(<div key={`k${keyCounter++}`}>/</div>);
+        divs.push(<div key={`k${keyCounter++}`}>{sortedModifiedPlayer.numberOfGames}</div>);
+      });
 
     return (
       <div>
