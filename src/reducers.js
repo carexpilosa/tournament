@@ -1,12 +1,8 @@
-import { createStore, combineReducers } from 'redux';
-// import { removeAllListeners } from 'cluster';
-
 export function playersReducer(state=[], action) {
   switch (action.type) {
     case 'UPDATE_PLAYERS':
       return updateArrayOfObjects([...state], action.data, ['id']);
     case 'DELETE_PLAYER':
-      console.log('delete', action.id);
       return state.filter((player) => {
         return action.id !== player.id;
       });
@@ -145,22 +141,6 @@ export function resultsReducer(state=[], action) {
     default: return state;
   }
 }
-
-const rootReducer = combineReducers({
-  players: playersReducer,
-  results: resultsReducer
-});
-
-const initialState = {
-  players: [],
-  results: []
-};
-
-export const store = createStore(
-  rootReducer,
-  initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
 const updateArrayOfObjects = (array, newOrChangedObject, keysToCheck) => {
   let replaced = false;

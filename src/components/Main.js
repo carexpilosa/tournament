@@ -21,9 +21,9 @@ class Main extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.example();
-  }
+  //componentWillMount() {
+  //  this.example();
+  //}
 
   render() {
     const { players, results} = this.props;
