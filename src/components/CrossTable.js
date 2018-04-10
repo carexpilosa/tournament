@@ -16,7 +16,7 @@ class CrossTable extends React.Component {
         {
           players.map((sp, idx) => {
             return <td className="crossTableThTop" key={idx}>
-              {sp.id} {sp.name && sp.name.length > 4
+              {sp.id + 1} {sp.name && sp.name.length > 4
                 ? `${sp.name.substr(0,3)}...` : sp.name}
             </td>;
           })
