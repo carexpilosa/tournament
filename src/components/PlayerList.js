@@ -20,7 +20,7 @@ class PlayerList extends React.Component {
               onChange={this.updatePlayerName.bind(this)}
               onKeyPress={this.inputKeyPress} />
           </div>
-        : <div key={`d${counter++}`} style={{border: '1px solid green'}}>{sp.id} {sp.name}</div>);
+        : <div key={`d${counter++}`} style={{border: '1px solid green'}}>{sp.id + 1} {sp.name}</div>);
       divs.push(this.state.idOfPlayerToEdit === sp.id
         ? <button key={`d${counter++}`} onClick={this.updatePlayer.bind(this)}>ok</button>
         : <div key={`d${counter++}`}><button onClick={e => this.edit(e, sp.id)}>edit</button></div>);

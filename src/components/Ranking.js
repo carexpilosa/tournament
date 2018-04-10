@@ -13,6 +13,7 @@ class Ranking extends React.Component {
     const players = this.props.players;
     let keyCounter = 0;
     let divs = [
+      <div key={`k${keyCounter++}`}>Pl.</div>,
       <div key={`k${keyCounter++}`}>Name</div>,
       <div key={`k${keyCounter++}`}>Pkt</div>,
       <div key={`k${keyCounter++}`}></div>,
@@ -27,6 +28,9 @@ class Ranking extends React.Component {
               : 0;
     };
 
+    let rank = 0;
+    let lastPoints = -1;
+    let showRank = 1;
     players
       .map(player => {
         return { ...player,
@@ -36,11 +40,19 @@ class Ranking extends React.Component {
       })
       .sort(byPoints)
       .forEach(sortedModifiedPlayer => {
+        rank++;
+        if (rank === 1 || lastPoints > sortedModifiedPlayer.points) {
+          showRank = rank;
+        } else {
+          showRank = '';
+        }
+        divs.push(<div style={{textAlign: 'right'}}>{showRank}. </div>);
         divs.push(<div key={`k${keyCounter++}`}>{sortedModifiedPlayer.name}</div>);
         divs.push(<div key={`k${keyCounter++}`}
           style={{textAlign: 'right', backgroundColor: 'green'}}>{sortedModifiedPlayer.points}</div>);
         divs.push(<div key={`k${keyCounter++}`}>/</div>);
         divs.push(<div key={`k${keyCounter++}`}>{sortedModifiedPlayer.numberOfGames}</div>);
+        lastPoints = sortedModifiedPlayer.points;
       });
 
     return (
@@ -48,7 +60,7 @@ class Ranking extends React.Component {
         <h4>Ranking</h4>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, max-content)',
+          gridTemplateColumns: 'repeat(5, max-content)',
           gridColumnGap: '0.2em',
           gridRowGap: '0.2em'
         }}>
