@@ -5,7 +5,7 @@ class CrossTable extends React.Component {
     super(props);
   }
 
-  render() {
+  _render() {
     const { players } = this.props;
     return (
       <div>
@@ -45,6 +45,32 @@ class CrossTable extends React.Component {
         }
         </tbody>
         </table>
+      </div>
+    );
+  }
+
+  render() {
+    const { players } = this.props;
+    const colNum = players.length;
+    let counter = 1;
+    return (
+      <div>
+        <h4>Cross Table</h4>
+        <div style={{display: 'grid', gridTemplateColumns: `repeat(${colNum}, 84px)`}}>
+          {
+            players.map((white, idx) => {
+              const ret = players.map((black, index) => {
+                return (
+                  <div className="dblCell" key={counter++}>
+                    <div className="whiteCell">{this.getResult(white.id, black.id).toString()}</div>
+                    <div className="blackCell">{this.getResult(black.id, white.id).toString()}</div>
+                </div>
+                );
+              });
+              return ret;
+            })
+          }
+        </div>
       </div>
     );
   }

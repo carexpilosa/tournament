@@ -60,3 +60,22 @@ div {
   border: 2px solid black;
   font-weight: bold;
 }
+
+.blackCell {
+  background-color: black;
+  color: white;
+  padding: 2px;
+  margin-right: 4px;
+}
+
+.whiteCell {
+  background-color: white;
+  color: black;
+  padding: 2px;
+}
+
+.dblCell {
+  display: flex;
+  /*width: 190px;*/
+  border: 1px solid blanchedalmond
+}

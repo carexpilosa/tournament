@@ -4,7 +4,7 @@ import Ranking from '../src/components/Ranking';
 
 //testing Ranking.calculatePoints:
 
-test('testing Ranking.calculatePoints', () => {
+test('testing Ranking.calculatePoints 1', () => {
   const myResults =
     [
       {
@@ -204,12 +204,29 @@ test('testing Ranking.calculatePoints 2', () => {
     name: 'Gerhard',
     id: 7
   }));
+});
 
-  /*expect(ranking.calculatePoints({
+test('testing Ranking.calculatePoints 3', () => {
+  const myResults = [
+    {
+      result: 0.5,
+      round: 1,
+      whiteID: 0,
+      blackID: 1
+    }
+  ];
+  const ranking = new Ranking({results: myResults});
+
+  console.log(ranking.calculatePoints({
     name: 'Fred-Erich',
-    id: 3
+    id: 1
+  }));
+
+  expect(ranking.calculatePoints({
+    name: 'Fred-Erich',
+    id: 1
   })).toEqual({
-    points: 0,
-    numberOfGames: 2 }
-  );*/
+    points: 0.5,
+    numberOfGames: 1 }
+  );
 });

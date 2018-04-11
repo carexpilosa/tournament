@@ -59,6 +59,7 @@ class Main extends React.Component {
   }
 
   insertPlayer(playerName) {
+    console.log('insert ...');
     if (playerName) {
       this.props.updatePlayers({
         name: playerName,
@@ -70,7 +71,7 @@ class Main extends React.Component {
   getHighestPlayerId() {
     const highestId = this.props.players.reduce((zwischenergebnis, player) => {
       return player.id > zwischenergebnis ? player.id : zwischenergebnis;
-    }, 0);
+    }, -1);
     return highestId;
   }
 
