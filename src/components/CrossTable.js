@@ -56,18 +56,22 @@ class CrossTable extends React.Component {
     return (
       <div>
         <h4>Cross Table</h4>
-        <div style={{display: 'grid', gridTemplateColumns: `repeat(${colNum}, 84px)`}}>
+        <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px)`}}>
           {
             players.map((white, idx) => {
               const ret = players.map((black, index) => {
+                const resultAsWhite = this.getResult(white.id, black.id) !== -1
+                  ? this.getResult(white.id, black.id) : '';
+                const resultAsBlack = this.getResult(black.id, white.id) !== -1
+                  ? 1 - this.getResult(black.id, white.id) : '';
                 return (
                   <div className="dblCell" key={counter++}>
-                    <div className="whiteCell">{this.getResult(white.id, black.id).toString()}</div>
-                    <div className="blackCell">{this.getResult(black.id, white.id).toString()}</div>
-                </div>
+                    <div className="whiteCell">{resultAsWhite}</div>
+                    <div className="blackCell">{resultAsBlack}</div>
+                  </div>
                 );
               });
-              return ret;
+              return [<div key={`k${counter++}`}>{white.name}</div>, ret];
             })
           }
         </div>

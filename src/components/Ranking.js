@@ -46,7 +46,7 @@ class Ranking extends React.Component {
         } else {
           showRank = '';
         }
-        divs.push(<div key={`k${keyCounter++}`}style={{textAlign: 'right'}}>{showRank}. </div>);
+        divs.push(<div key={`k${keyCounter++}`} style={{textAlign: 'right'}}>{showRank}. </div>);
         divs.push(<div key={`k${keyCounter++}`}>{sortedModifiedPlayer.name}</div>);
         divs.push(<div key={`k${keyCounter++}`}
           style={{textAlign: 'right', backgroundColor: 'green'}}>{sortedModifiedPlayer.points}</div>);
