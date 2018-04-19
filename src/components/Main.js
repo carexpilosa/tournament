@@ -27,8 +27,10 @@ class Main extends React.Component {
 
   render() {
     const { players, results} = this.props;
+    let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.props));
     return (
       <div>
+        <a href={dataStr} download="file.json">donwload</a>
         <h3>Tournament</h3>
         <button onClick={() => this.cleanPlayers()}>reset</button><br/>
         <button onClick={() => this.example()}>reset to example players</button><br/>
