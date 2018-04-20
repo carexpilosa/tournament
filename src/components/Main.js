@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Download from './Download';
 import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
@@ -27,11 +28,10 @@ class Main extends React.Component {
 
   render() {
     const { players, results} = this.props;
-    let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.props));
     return (
       <div>
-        <a href={dataStr} download="file.json">donwload</a>
         <h3>Tournament</h3>
+        <Download players={players} results={results}/>
         <button onClick={() => this.cleanPlayers()}>reset</button><br/>
         <button onClick={() => this.example()}>reset to example players</button><br/>
         <button onClick={() => this.exampleResults()}>set example results</button><br/>
@@ -39,7 +39,8 @@ class Main extends React.Component {
           getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
         <Ranking players={players} results={results} />
-        <CrossTable players={players} results={results} />
+        <CrossTable players={players} results={results}
+          getPointsForPlayer={this.getPointsForPlayer.bind(this)} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
           saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
       </div>
@@ -61,7 +62,6 @@ class Main extends React.Component {
   }
 
   insertPlayer(playerName) {
-    console.log('insert ...');
     if (playerName) {
       this.props.updatePlayers({
         name: playerName,
@@ -163,6 +163,21 @@ class Main extends React.Component {
       console.log('errrrrrrrr');
     }
     return filtered[0];
+  }
+
+  getPointsForPlayer(playerId) {
+    let pointsAsWhite = 0,
+      pointsAsBlack = 0;
+    this.props.results.forEach(result => {
+      if(result.result !== -1) {
+        if(result.whiteID === playerId) {
+          pointsAsWhite += result.result;
+        } else if (result.blackID === playerId) {
+          pointsAsBlack += (1 - result.result);
+        }
+      }
+    });
+    return pointsAsWhite + pointsAsBlack;
   }
 }
 

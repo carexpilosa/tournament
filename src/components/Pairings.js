@@ -8,7 +8,8 @@ class Pairings extends React.Component {
   render() {
     const players = this.props.players;
     let pairings = new Map();
-    for(let round = 1; round < players.length; round++) {
+    const maxRound = players.length % 2 ? players.length : players.length -1;
+    for(let round = 1; round < maxRound + 1; round++) {
       pairings.set(round, this.props.getPairings(round));
     }
 
@@ -44,6 +45,7 @@ class Pairings extends React.Component {
             });
             return <div key={index}>
               <hr />
+              <h4>{ round }</h4>
               { pairingsOfRound }
             </div>;
           })

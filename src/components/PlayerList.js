@@ -14,7 +14,7 @@ class PlayerList extends React.Component {
     const divs = [];
     let counter = 0;
     players.forEach(sp => {
-      divs.push(<div>{sp.id + 1} </div>);
+      divs.push(<div key={`d${counter++}`} >{sp.id + 1} </div>);
       divs.push(this.state.idOfPlayerToEdit === sp.id
         ? <div key={`d${counter++}`}>
             <input type="text" defaultValue={sp.name}

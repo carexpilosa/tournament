@@ -49,7 +49,7 @@ class CrossTable extends React.Component {
     );
   }
 
-  render() {
+  __render() {
     const { players } = this.props;
     const colNum = players.length;
     let counter = 1;
@@ -77,6 +77,48 @@ class CrossTable extends React.Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+    const { players } = this.props;
+    const colNum = players.length;
+    let counter = 1;
+    const modPlayers = players.map(player => {
+      const pnts = this.props.getPointsForPlayer(player.id);
+      player.points = pnts;
+      return player;
+    });
+
+    return (
+      <div>
+        <h4>Cross Table</h4>
+        <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px)`}}>
+          {
+            modPlayers
+              .sort(this.byPoints)
+              .map((white, idx) => {
+                const ret = players.map((black, index) => {
+                  const resultAsWhite = this.getResult(white.id, black.id) !== -1
+                    ? this.getResult(white.id, black.id) : '';
+                  const resultAsBlack = this.getResult(black.id, white.id) !== -1
+                    ? 1 - this.getResult(black.id, white.id) : '';
+                  return (
+                    <div className="dblCell" key={counter++}>
+                      <div className="whiteCell">{resultAsWhite}</div>
+                      <div className="blackCell">{resultAsBlack}</div>
+                    </div>
+                  );
+                });
+                return [<div key={`k${counter++}`}>{white.name}</div>, ret];
+              })
+            }
+        </div>
+      </div>
+    );
+  }
+
+  byPoints(a, b) {
+    return a.points < b.points ? 1 : a.points > b.points ? -1 : 0;
   }
 
   getResult(whiteID, blackID) {
