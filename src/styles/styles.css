@@ -66,6 +66,7 @@ div {
   color: white;
   padding: 2px;
   width: 32px;
+  text-align: center;
 }
 
 .whiteCell {
@@ -73,6 +74,7 @@ div {
   color: black;
   width: 32px;
   padding: 2px;
+  text-align: center;
 }
 
 .dblCell {

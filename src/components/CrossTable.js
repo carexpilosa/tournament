@@ -87,26 +87,38 @@ class CrossTable extends React.Component {
       const pnts = this.props.getPointsForPlayer(player.id);
       player.points = pnts;
       return player;
-    });
+    }).sort(this.byPoints);
 
     return (
       <div>
         <h4>Cross Table</h4>
         <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px) max-content`}}>
+        <div></div>
+          {
+            modPlayers.map((player) => {
+              return <div style={{textAlign: 'center'}} key={`k${counter++}`}>{player.name}</div>;
+            })
+          }
+        <div></div>
           {
             modPlayers
-              .sort(this.byPoints)
               .map((white, idx) => {
                 const ret = modPlayers.map((black, index) => {
                   let resultAsWhite = '',
                     resultAsBlack = '';
                   if (white.id === black.id) {
-                    return <div className="dblCell" style={{backgroundColor: 'gray'}} ></div>;
+                    return <div className="dblCell" ></div>;
                   } else {
                     resultAsWhite = this.getResult(white.id, black.id) !== -1
                       ? this.getResult(white.id, black.id) : '';
                     resultAsBlack = this.getResult(black.id, white.id) !== -1
                       ? 1 - this.getResult(black.id, white.id) : '';
+                    if (resultAsWhite === 0.5) {
+                      resultAsWhite = '½';
+                    }
+                    if (resultAsBlack === 0.5) {
+                      resultAsBlack = '½';
+                    }
                     return (
                       <div className="dblCell" key={counter++}>
                         <div className="whiteCell">{resultAsWhite}</div>
@@ -116,9 +128,9 @@ class CrossTable extends React.Component {
                   }
                 });
                 return [
-                  <div key={`k${counter++}`}>{white.name}</div>,
+                  <div style={{margin: '5px'}} key={`k${counter++}`}>{white.name}</div>,
                   ret,
-                  <div key={`k${counter++}`}>{white.points}</div>
+                  <div style={{margin: '5px'}} key={`k${counter++}`}>{white.points}</div>
                 ];
               })
             }
