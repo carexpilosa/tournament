@@ -100,18 +100,20 @@ class CrossTable extends React.Component {
                 const ret = modPlayers.map((black, index) => {
                   let resultAsWhite = '',
                     resultAsBlack = '';
-                  if (white.id !== black.id) {
+                  if (white.id === black.id) {
+                    return <div className="dblCell" style={{backgroundColor: 'gray'}} ></div>;
+                  } else {
                     resultAsWhite = this.getResult(white.id, black.id) !== -1
                       ? this.getResult(white.id, black.id) : '';
                     resultAsBlack = this.getResult(black.id, white.id) !== -1
                       ? 1 - this.getResult(black.id, white.id) : '';
+                    return (
+                      <div className="dblCell" key={counter++}>
+                        <div className="whiteCell">{resultAsWhite}</div>
+                        <div className="blackCell">{resultAsBlack}</div>
+                      </div>
+                    );
                   }
-                  return (
-                    <div className="dblCell" key={counter++}>
-                      <div className="whiteCell">{resultAsWhite}</div>
-                      <div className="blackCell">{resultAsBlack}</div>
-                    </div>
-                  );
                 });
                 return [
                   <div key={`k${counter++}`}>{white.name}</div>,
