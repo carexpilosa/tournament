@@ -92,16 +92,20 @@ class CrossTable extends React.Component {
     return (
       <div>
         <h4>Cross Table</h4>
-        <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px)`}}>
+        <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px) max-content`}}>
           {
             modPlayers
               .sort(this.byPoints)
               .map((white, idx) => {
-                const ret = players.map((black, index) => {
-                  const resultAsWhite = this.getResult(white.id, black.id) !== -1
-                    ? this.getResult(white.id, black.id) : '';
-                  const resultAsBlack = this.getResult(black.id, white.id) !== -1
-                    ? 1 - this.getResult(black.id, white.id) : '';
+                const ret = modPlayers.map((black, index) => {
+                  let resultAsWhite = '',
+                    resultAsBlack = '';
+                  if (white.id !== black.id) {
+                    resultAsWhite = this.getResult(white.id, black.id) !== -1
+                      ? this.getResult(white.id, black.id) : '';
+                    resultAsBlack = this.getResult(black.id, white.id) !== -1
+                      ? 1 - this.getResult(black.id, white.id) : '';
+                  }
                   return (
                     <div className="dblCell" key={counter++}>
                       <div className="whiteCell">{resultAsWhite}</div>
@@ -109,7 +113,11 @@ class CrossTable extends React.Component {
                     </div>
                   );
                 });
-                return [<div key={`k${counter++}`}>{white.name}</div>, ret];
+                return [
+                  <div key={`k${counter++}`}>{white.name}</div>,
+                  ret,
+                  <div key={`k${counter++}`}>{white.points}</div>
+                ];
               })
             }
         </div>
