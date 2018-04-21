@@ -22,10 +22,6 @@ class Main extends React.Component {
     super(props);
   }
 
-  //componentWillMount() {
-  //  this.example();
-  //}
-
   render() {
     const { players, results} = this.props;
     return (
@@ -38,11 +34,9 @@ class Main extends React.Component {
         <PlayerList players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
         <Input insertPlayer={this.insertPlayer.bind(this)} />
-        {
-          //<Ranking players={players} results={results} />
-        }
         <CrossTable players={players} results={results}
-          getPointsForPlayer={this.getPointsForPlayer.bind(this)} />
+          getPointsForPlayer={this.getPointsForPlayer.bind(this)}
+          floatToFraction={this.floatToFraction} />
         <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
           saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
       </div>
@@ -180,6 +174,18 @@ class Main extends React.Component {
       }
     });
     return pointsAsWhite + pointsAsBlack;
+  }
+
+  floatToFraction(float) {
+    if(parseInt(float) === float) {
+      return float;
+    } else if(float === 0.5) {
+      return '½';
+    } else if(float - parseInt(float) === 0.5) {
+      return `${parseInt(float)}½`;
+    } else {
+      return float;
+    }
   }
 }
 
