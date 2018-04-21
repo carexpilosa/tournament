@@ -12,7 +12,7 @@ class ShowHide extends React.Component {
     return (
       <div>
         <div onClick={e => this.setState({visibility: !this.state.visibility})}>
-          <h4>{ this.props.title } [{ this.state.visibility ? 'ausblenden' : 'einblenden'}]</h4>
+          <h4>{ this.props.title } <span style={{cursor: 'pointer'}}>{ this.state.visibility ? '[ einklappen ]' : '[ ausklappen ]' }</span></h4>
         </div>
         { this.state.visibility
           ? this.props.children
