@@ -15,7 +15,6 @@ class Pairings extends React.Component {
 
     return (
       <div>
-        <h4>Pairings</h4>
         {
           Array.from(pairings).map(([round, val], index) => {
             const pairingsOfRound = val.map((pairing, idx) => {
@@ -45,7 +44,7 @@ class Pairings extends React.Component {
             });
             return <div key={index}>
               <hr />
-              <h4>{ round }</h4>
+              <h4>{ round }. Runde</h4>
               { pairingsOfRound }
             </div>;
           })

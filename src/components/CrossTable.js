@@ -8,7 +8,7 @@ class CrossTable extends React.Component {
   render() {
     const { players, getPointsForPlayer, floatToFraction } = this.props;
     const colNum = players.length;
-    let counter = 1;
+    let counter = 1, rank = 1;
     const modPlayers = players.map(player => {
       const pnts = getPointsForPlayer(player.id);
       player.points = pnts;
@@ -17,7 +17,6 @@ class CrossTable extends React.Component {
 
     return (
       <div>
-        <h4>Cross Table</h4>
         <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px) max-content`}}>
         <div></div>
           {
@@ -33,7 +32,7 @@ class CrossTable extends React.Component {
                   let resultAsWhite = '',
                     resultAsBlack = '';
                   if (white.id === black.id) {
-                    return <div className="dblCell" ></div>;
+                    return <div key={`k${counter++}`} className="dblCell" ></div>;
                   } else {
                     resultAsWhite = this.getResult(white.id, black.id) !== -1
                       ? this.getResult(white.id, black.id) : '';
@@ -42,7 +41,7 @@ class CrossTable extends React.Component {
                     resultAsWhite = floatToFraction(resultAsWhite);
                     resultAsBlack = floatToFraction(resultAsBlack);
                     return (
-                      <div className="dblCell" key={counter++}>
+                      <div className="dblCell" key={`k${counter++}`} >
                         <div className="whiteCell">{resultAsWhite}</div>
                         <div className="blackCell">{resultAsBlack}</div>
                       </div>
@@ -50,7 +49,7 @@ class CrossTable extends React.Component {
                   }
                 });
                 return [
-                  <div style={{margin: '5px'}} key={`k${counter++}`}>{white.name}</div>,
+                  <div style={{margin: '5px'}} key={`k${counter++}`}>{rank++}. {white.name}</div>,
                   ret,
                   <div style={{margin: '5px'}} key={`k${counter++}`}>{floatToFraction(white.points)}</div>
                 ];

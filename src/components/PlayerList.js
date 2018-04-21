@@ -34,7 +34,6 @@ class PlayerList extends React.Component {
 
     return (
       <div>
-        <h4>List Of Players</h4>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, max-content)',

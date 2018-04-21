@@ -6,6 +6,8 @@ import PlayerList from './PlayerList';
 import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
+import ShowHide from './ShowHide';
+
 //import Ranking from './Ranking';
 import {
   updatePlayers,
@@ -26,19 +28,27 @@ class Main extends React.Component {
     const { players, results} = this.props;
     return (
       <div>
-        <h3>Tournament</h3>
-        <Download players={players} results={results}/>
-        <button onClick={() => this.cleanPlayers()}>reset</button><br/>
-        <button onClick={() => this.example()}>reset to example players</button><br/>
-        <button onClick={() => this.exampleResults()}>set example results</button><br/>
-        <PlayerList players={players} updatePlayers={this.props.updatePlayers}
+        <h3>Turnier</h3>
+        <ShowHide title="Buttons">
+          <Download players={players} results={results}/>
+          <button onClick={() => this.cleanPlayers()}>reset</button><br/>
+          <button onClick={() => this.example()}>reset to example players</button><br/>
+          <button onClick={() => this.exampleResults()}>set example results</button><br/>
+        </ShowHide>
+        <ShowHide title="Teilnehmerliste">
+          <PlayerList component={PlayerList} players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
-        <Input insertPlayer={this.insertPlayer.bind(this)} />
-        <CrossTable players={players} results={results}
-          getPointsForPlayer={this.getPointsForPlayer.bind(this)}
-          floatToFraction={this.floatToFraction} />
-        <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
-          saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
+          <Input insertPlayer={this.insertPlayer.bind(this)} />
+        </ShowHide>
+        <ShowHide title="Kreuztabelle">
+          <CrossTable players={players} results={results}
+            getPointsForPlayer={this.getPointsForPlayer.bind(this)}
+            floatToFraction={this.floatToFraction} />
+          </ShowHide>
+          <ShowHide title="Paarungen">
+          <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
+            saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
+        </ShowHide>
       </div>
     );
   }
