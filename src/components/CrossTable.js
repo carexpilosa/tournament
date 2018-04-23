@@ -17,27 +17,35 @@ class CrossTable extends React.Component {
 
     return (
       <div>
-        <div style={{display: 'grid', gridTemplateColumns: `max-content repeat(${colNum}, 70px) max-content`}}>
+        <div style={{display: 'grid', gridTemplateColumns: `repeat(3, max-content) repeat(${colNum}, 70px)`}}>
+        <div></div>
+        <div></div>
         <div></div>
           {
             modPlayers.map((player) => {
               return <div style={{textAlign: 'center'}} key={`k${counter++}`}>{player.name}</div>;
             })
           }
-        <div></div>
           {
             modPlayers
               .map((white, idx) => {
+                let numOfGames = 0;
                 const ret = modPlayers.map((black, index) => {
                   let resultAsWhite = '',
                     resultAsBlack = '';
                   if (white.id === black.id) {
                     return <div key={`k${counter++}`} className="dblCell" ></div>;
                   } else {
-                    resultAsWhite = this.getResult(white.id, black.id) !== -1
-                      ? this.getResult(white.id, black.id) : '';
-                    resultAsBlack = this.getResult(black.id, white.id) !== -1
-                      ? 1 - this.getResult(black.id, white.id) : '';
+                    if (typeof this.getResult(white.id, black.id) !== 'undefined' &&
+                      this.getResult(white.id, black.id) !== -1) {
+                      resultAsWhite = this.getResult(white.id, black.id);
+                      numOfGames++;
+                    }
+                    if (typeof this.getResult(black.id, white.id) !== 'undefined' &&
+                      this.getResult(black.id, white.id) !== -1) {
+                      resultAsBlack = 1 - this.getResult(black.id, white.id);
+                      numOfGames++;
+                    }
                     resultAsWhite = floatToFraction(resultAsWhite);
                     resultAsBlack = floatToFraction(resultAsBlack);
                     return (
@@ -50,8 +58,9 @@ class CrossTable extends React.Component {
                 });
                 return [
                   <div style={{margin: '5px'}} key={`k${counter++}`}>{rank++}. {white.name}</div>,
-                  ret,
-                  <div style={{margin: '5px'}} key={`k${counter++}`}>{floatToFraction(white.points)}</div>
+                  <div style={{margin: '5px'}} key={`k${counter++}`}>{floatToFraction(white.points)}</div>,
+                  <div style={{margin: '5px'}} key={`k${counter++}`}>/ {numOfGames}</div>,
+                  ret
                 ];
               })
             }

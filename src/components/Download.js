@@ -9,7 +9,7 @@ class Download extends React.Component {
     let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.props));
     return (
       <div>
-        <a href={dataStr} download="file.json">donwload</a>
+        <a href={dataStr} download="file.json">download</a>
       </div>
     );
   }
