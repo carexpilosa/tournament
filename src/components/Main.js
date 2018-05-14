@@ -32,7 +32,7 @@ class Main extends React.Component {
       <div>
         READMORE:
         <ReadMore ellipsis={<button>...</button>}
-          shortViewHeight={'3em'}>
+          shortViewHeight={'15px'}>
           <div>
             <div>div</div>
             <p>bla</p>
@@ -50,6 +50,12 @@ class Main extends React.Component {
           </div>
         </ReadMore>
         :READMORE
+        <ReadMore ellipsis={<button>...</button>}
+          shortViewHeight={'15px'}>
+          <div>
+            <b>is nur eine Reihe</b>
+          </div>
+        </ReadMore>
         <h3>Turnier</h3>
         <h4>Buttons</h4>
         <ReadMore ellipsis={ellipsis}
@@ -61,21 +67,21 @@ class Main extends React.Component {
         </ReadMore>
         <h4>Teilnehmerliste</h4>
         <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+          shortViewHeight={'15px'}>
           <PlayerList component={PlayerList} players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
           <Input insertPlayer={this.insertPlayer.bind(this)} />
         </ReadMore>
         <h4>Kreuztabelle</h4>
         <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+          shortViewHeight={'15px'}>
           <CrossTable players={players} results={results}
             getPointsForPlayer={this.getPointsForPlayer.bind(this)}
             floatToFraction={this.floatToFraction} />
         </ReadMore>
         <h4>Paarungen</h4>
         <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+          shortViewHeight={'15px'}>
           <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
             saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
         </ReadMore>

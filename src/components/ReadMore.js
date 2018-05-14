@@ -10,12 +10,12 @@ class ReadMore extends React.Component {
     this.state = {
       initialized: false,
       actLongViewHeight: null,
-      longView: false
+      longView: true
     };
   }
 
   componentDidMount() {
-    this.init();
+    //this.init();
   }
 
   init() {
@@ -24,10 +24,16 @@ class ReadMore extends React.Component {
       allowedAttributes: [],
       textFilter: (text) => text.replace(/$/, ' ')
     });
+    const actLongViewHeight = this.myRef.getBoundingClientRect().height;
+    console.log(actLongViewHeight, this.props.shortViewHeight);
+    const newLongView = 
+      parseInt(actLongViewHeight) <= parseInt(this.props.shortViewHeight) ?
+        true : false;
 
     this.setState({
       initialized: true,
-      actLongViewHeight: this.myRef.getBoundingClientRect().height,
+      actLongViewHeight,
+      longView: newLongView,
       strippedContent
     });
   }
