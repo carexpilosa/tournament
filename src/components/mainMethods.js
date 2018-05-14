@@ -7,7 +7,6 @@ import Input from './Input';
 import CrossTable from './CrossTable';
 import Pairings from './Pairings';
 import ShowHide from './ShowHide';
-import ReadMore from './ReadMore';
 
 //import Ranking from './Ranking';
 import {
@@ -27,58 +26,29 @@ class Main extends React.Component {
 
   render() {
     const { players, results} = this.props;
-    const ellipsis = <div><button>...</button></div>;
     return (
       <div>
-        READMORE:
-        <ReadMore ellipsis={<button>...</button>}
-          shortViewHeight={'3em'}>
-          <div>
-            <div>div</div>
-            <p>bla</p>
-            <h1>Kreuztabelle</h1>
-            <h2>Paarungen</h2>
-            <h3>PlayerList</h3>
-            <h4>ShowHide</h4>
-            <ul>
-              <li>eins und zwie und grei und vier und bla bla zicke zacke und auc backe...</li>
-              <li>zwo</li>
-              <li>dro</li>
-              <li>vier</li>
-              <li>fief</li>
-            </ul>
-          </div>
-        </ReadMore>
-        :READMORE
         <h3>Turnier</h3>
-        <h4>Buttons</h4>
-        <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'15px'}>
+        <ShowHide title="Buttons">
           <Download players={players} results={results}/>
           <button onClick={() => this.cleanPlayers()}>reset</button><br/>
           <button onClick={() => this.example()}>reset to example players</button><br/>
           <button onClick={() => this.exampleResults()}>set example results</button><br/>
-        </ReadMore>
-        <h4>Teilnehmerliste</h4>
-        <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+        </ShowHide>
+        <ShowHide title="Teilnehmerliste">
           <PlayerList component={PlayerList} players={players} updatePlayers={this.props.updatePlayers}
           getPlayerById={this.getPlayerById.bind(this)} deletePlayer={this.props.deletePlayer.bind(this)} />
           <Input insertPlayer={this.insertPlayer.bind(this)} />
-        </ReadMore>
-        <h4>Kreuztabelle</h4>
-        <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+        </ShowHide>
+        <ShowHide title="Kreuztabelle">
           <CrossTable players={players} results={results}
             getPointsForPlayer={this.getPointsForPlayer.bind(this)}
             floatToFraction={this.floatToFraction} />
-        </ReadMore>
-        <h4>Paarungen</h4>
-        <ReadMore ellipsis={ellipsis}
-          shortViewHeight={'3em'}>
+          </ShowHide>
+          <ShowHide title="Paarungen">
           <Pairings players={this.props.players} getPairings={this.getPairings.bind(this)}
             saveResult={this.saveResult.bind(this)} getResult={this.getResult.bind(this)} />
-        </ReadMore>
+        </ShowHide>
       </div>
     );
   }

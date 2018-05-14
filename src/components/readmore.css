@@ -1,0 +1,16 @@
+ul, ol {
+  margin-top: 0px;
+}
+
+.divRefShort {
+  /*background-color: yellow;*/
+  /*border: 1px solid green;*/
+}
+
+.divRefShort div {
+  display: inline;
+}
+
+.divRefShort ul {
+  display: block;
+}

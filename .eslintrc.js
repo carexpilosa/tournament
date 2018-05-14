@@ -136,9 +136,6 @@ module.exports = {
     ],
     "space-in-parens": [
       "error", "never"
-    ],
-    "spaced-comment": [
-      "warn"
     ]
   }
 };

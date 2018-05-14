@@ -6,14 +6,10 @@ class CrossTable extends React.Component {
   }
 
   render() {
-    const { players, getPointsForPlayer, floatToFraction } = this.props;
+    const { players, floatToFraction } = this.props;
     const colNum = players.length;
     let counter = 1, rank = 1;
-    const modPlayers = players.map(player => {
-      const pnts = getPointsForPlayer(player.id);
-      player.points = pnts;
-      return player;
-    }).sort(this.byPoints);
+    const playersWithPoints = this.getPlayersWithPoints();
 
     return (
       <div>
@@ -22,15 +18,15 @@ class CrossTable extends React.Component {
         <div></div>
         <div></div>
           {
-            modPlayers.map((player) => {
+            playersWithPoints.map((player) => {
               return <div style={{textAlign: 'center'}} key={`k${counter++}`}>{player.name}</div>;
             })
           }
           {
-            modPlayers
+            playersWithPoints
               .map((white, idx) => {
                 let numOfGames = 0;
-                const ret = modPlayers.map((black, index) => {
+                const ret = playersWithPoints.map((black, index) => {
                   let resultAsWhite = '',
                     resultAsBlack = '';
                   if (white.id === black.id) {
@@ -85,6 +81,17 @@ class CrossTable extends React.Component {
       }
     }
     return result;
+  }
+
+  getPlayersWithPoints() {
+    const { players, getPointsForPlayer } = this.props;
+    const playersWithPoints = players.map(player => {
+      let copyOfPlayer = { ...player };
+      const pnts = getPointsForPlayer(copyOfPlayer.id);
+      copyOfPlayer.points = pnts;
+      return copyOfPlayer;
+    }).sort(this.byPoints);
+    return playersWithPoints;
   }
 }
 
